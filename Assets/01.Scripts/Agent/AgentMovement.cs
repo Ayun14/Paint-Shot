@@ -26,12 +26,12 @@ public class AgentMovement : MonoBehaviour, IMovement
 
     private void Start()
     {
-        _playerInput.MovementEvent += HandleMovementEvent;
+        _playerInput.OnMovementEvent += HandleMovementEvent;
     }
 
     private void OnDestroy()
     {
-        _playerInput.MovementEvent -= HandleMovementEvent;
+        _playerInput.OnMovementEvent -= HandleMovementEvent;
     }
 
     private void HandleMovementEvent(Vector3 vector)
