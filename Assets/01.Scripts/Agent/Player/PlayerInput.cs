@@ -1,12 +1,17 @@
 using System;
 using UnityEngine;
+using UnityEngine.Windows;
 
 public class PlayerInput : MonoBehaviour
 {
     public event Action<Vector3> MovementEvent;
+
+    [SerializeField] private FixedJoystick _joystick;
+
+    private bool _playerInputEnabled = false;
+
     public Vector3 MousePosition { get; private set; }
 
-    private bool _playerInputEnabled = true;
 
     public void SetPlayerInput(bool enable)
     {
@@ -22,11 +27,11 @@ public class PlayerInput : MonoBehaviour
 
     private void GetMovementInput()
     {
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
+        float xInput = _joystick.Horizontal;
+        float zInput = _joystick.Vertical;
 
-        Vector3 moveVector = new Vector3(horizontal, 0, vertical);
+        Vector3 moveInput = new Vector3(xInput, 0, zInput);
 
-        MovementEvent?.Invoke(moveVector);
+        MovementEvent?.Invoke(moveInput.normalized);
     }
 }
