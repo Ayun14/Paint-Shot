@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class ParticlesController : MonoBehaviour
 {
-    [SerializeField] private float _minRadius = 0.05f;
-    [SerializeField] private float _maxRadius = 0.2f;
+    [SerializeField] private float _minRadius = 0.1f;
+    [SerializeField] private float _maxRadius = 0.3f;
     [SerializeField] private float _strength = 1;
     [SerializeField] private float _hardness = 1;
     [SerializeField] private Color _paintColor;
@@ -15,21 +15,27 @@ public class ParticlesController : MonoBehaviour
     void Start()
     {
         _particleSystem = GetComponent<ParticleSystem>();
+        _collisionEventList = new List<ParticleCollisionEvent>();
     }
 
     void OnParticleCollision(GameObject other)
     {
-        int numCollisionEvents = _particleSystem.GetCollisionEvents(other, _collisionEventList);
+        if (_particleSystem == null) return;
 
-        //Paintable p = other.GetComponent<Paintable>();
-        //if (p != null)
-        //{
-        //    for (int i = 0; i < numCollisionEvents; i++)
-        //    {
-        //        Vector3 pos = collisionEvents[i].intersection;
-        //        float radius = Random.Range(minRadius, maxRadius);
-        //        PaintManager.instance.paint(p, pos, radius, hardness, strength, paintColor);
-        //    }
-        //}
+        int numCollisionEvents = 
+            _particleSystem.GetCollisionEvents(other, _collisionEventList);
+
+        Paintable p = other.GetComponent<Paintable>();
+
+        if (p != null)
+        {
+            for (int i = 0; i < numCollisionEvents; i++)
+            {
+                Vector3 pos = _collisionEventList[i].intersection;
+                float radius = Random.Range(_minRadius, _maxRadius);
+                PaintManager.Instance.paint
+                    (p, pos, radius, _hardness, _strength, _paintColor);
+            }
+        }
     }
 }

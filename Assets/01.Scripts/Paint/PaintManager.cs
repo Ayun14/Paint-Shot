@@ -14,7 +14,6 @@ public class PaintManager : Singleton<PaintManager>
     private int hardnessID = Shader.PropertyToID("_Hardness");
     private int strengthID = Shader.PropertyToID("_Strength");
     private int radiusID = Shader.PropertyToID("_Radius");
-    private int blendOpID = Shader.PropertyToID("_BlendOp");
     private int colorID = Shader.PropertyToID("_PainterColor");
     private int textureID = Shader.PropertyToID("_MainTex");
     private int uvOffsetID = Shader.PropertyToID("_OffsetUV");
@@ -33,6 +32,7 @@ public class PaintManager : Singleton<PaintManager>
 
         // 새로운 명령 버퍼 생성
         command = new CommandBuffer();
+        command.name = "CommmandBuffer - " + gameObject.name;
     }
 
     public void initTextures(Paintable paintable)
@@ -67,7 +67,7 @@ public class PaintManager : Singleton<PaintManager>
         RenderTexture uvIslands = paintable.getUVIslands();
         RenderTexture extend = paintable.getExtend();
         RenderTexture support = paintable.getSupport();
-        Renderer rend = paintable.getRenderer(); // 
+        Renderer rend = paintable.getRenderer();
 
         // 페인트 메테리얼의 쉐이더 속성을 설정
         paintMaterial.SetFloat(prepareUVID, 0);

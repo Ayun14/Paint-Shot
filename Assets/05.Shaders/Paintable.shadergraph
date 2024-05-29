@@ -1224,7 +1224,7 @@
     "m_DefaultRefNameVersion": 1,
     "m_RefNameGeneratedByDisplayName": "Albedo",
     "m_DefaultReferenceName": "_Albedo",
-    "m_OverrideReferenceName": "",
+    "m_OverrideReferenceName": "Color_863351f5ceea4c998ef51baab6dd758b",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
     "m_CustomSlotLabel": "",
@@ -1290,7 +1290,7 @@
     "m_DefaultRefNameVersion": 1,
     "m_RefNameGeneratedByDisplayName": "GlitterTexture",
     "m_DefaultReferenceName": "_GlitterTexture",
-    "m_OverrideReferenceName": "",
+    "m_OverrideReferenceName": "Texture2D_01612b2f09a24a9c9879c83799445b96",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
     "m_CustomSlotLabel": "",
@@ -1558,7 +1558,7 @@
     "m_DefaultRefNameVersion": 1,
     "m_RefNameGeneratedByDisplayName": "PaintSmoothness",
     "m_DefaultReferenceName": "_PaintSmoothness",
-    "m_OverrideReferenceName": "",
+    "m_OverrideReferenceName": "Vector1_7bf270fe91494824b4209d2dc1faae23",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
     "m_CustomSlotLabel": "",
@@ -1931,7 +1931,7 @@
     "m_DefaultRefNameVersion": 1,
     "m_RefNameGeneratedByDisplayName": "GlitterColor",
     "m_DefaultReferenceName": "_GlitterColor",
-    "m_OverrideReferenceName": "",
+    "m_OverrideReferenceName": "Color_1bf9c5e6f5c34360a490da1c94e6a7c1",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
     "m_CustomSlotLabel": "",
@@ -2178,7 +2178,7 @@
     "m_DefaultRefNameVersion": 1,
     "m_RefNameGeneratedByDisplayName": "Smoothness",
     "m_DefaultReferenceName": "_Smoothness",
-    "m_OverrideReferenceName": "",
+    "m_OverrideReferenceName": "Vector1_2c6f3ce4bba145b09c0a22fced0d7f85",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
     "m_CustomSlotLabel": "",
@@ -2706,7 +2706,7 @@
     "m_CustomColors": {
         "m_SerializableColors": []
     },
-    "m_HashType": 0
+    "m_HashType": 1
 }
 
 {
@@ -4008,7 +4008,7 @@
     "m_DefaultRefNameVersion": 1,
     "m_RefNameGeneratedByDisplayName": "MainTexture",
     "m_DefaultReferenceName": "_MainTexture",
-    "m_OverrideReferenceName": "",
+    "m_OverrideReferenceName": "Texture2D_41271c3c5f484ca2a435c65087a81705",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
     "m_CustomSlotLabel": "",
@@ -4367,7 +4367,7 @@
     "m_DefaultRefNameVersion": 1,
     "m_RefNameGeneratedByDisplayName": "MainTextureTiling",
     "m_DefaultReferenceName": "_MainTextureTiling",
-    "m_OverrideReferenceName": "",
+    "m_OverrideReferenceName": "Vector2_e97cb9b7b5564bc9857e7669e2d0b82f",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
     "m_CustomSlotLabel": "",
@@ -4863,7 +4863,7 @@
     "m_CustomColors": {
         "m_SerializableColors": []
     },
-    "m_HashType": 0
+    "m_HashType": 1
 }
 
 {
@@ -5061,7 +5061,7 @@
     "m_DefaultRefNameVersion": 1,
     "m_RefNameGeneratedByDisplayName": "GlitterTiling",
     "m_DefaultReferenceName": "_GlitterTiling",
-    "m_OverrideReferenceName": "",
+    "m_OverrideReferenceName": "Vector2_55edcb19ba1d459dbb3c027e66abbc1e",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
     "m_CustomSlotLabel": "",
@@ -5174,7 +5174,7 @@
     "m_DefaultRefNameVersion": 1,
     "m_RefNameGeneratedByDisplayName": "PaintMetallic",
     "m_DefaultReferenceName": "_PaintMetallic",
-    "m_OverrideReferenceName": "",
+    "m_OverrideReferenceName": "Vector1_0de750b9c41b4a5daef844a1599f5ac7",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
     "m_CustomSlotLabel": "",
@@ -5727,7 +5727,7 @@
     "m_DefaultRefNameVersion": 1,
     "m_RefNameGeneratedByDisplayName": "ShapeNoiseScale",
     "m_DefaultReferenceName": "_ShapeNoiseScale",
-    "m_OverrideReferenceName": "",
+    "m_OverrideReferenceName": "Vector1_2871f666316541908d110962eef07f02",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
     "m_CustomSlotLabel": "",
@@ -5957,7 +5957,7 @@
     "m_DefaultRefNameVersion": 1,
     "m_RefNameGeneratedByDisplayName": "GlitterIntensity",
     "m_DefaultReferenceName": "_GlitterIntensity",
-    "m_OverrideReferenceName": "",
+    "m_OverrideReferenceName": "Vector1_f6677799b193415b8be7686b658a6e85",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
     "m_CustomSlotLabel": "",
@@ -6040,7 +6040,7 @@
     "m_DefaultRefNameVersion": 1,
     "m_RefNameGeneratedByDisplayName": "BumpNoiseScale",
     "m_DefaultReferenceName": "_BumpNoiseScale",
-    "m_OverrideReferenceName": "",
+    "m_OverrideReferenceName": "Vector1_b5cc7f6f25194a778cb438f45fbbce66",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
     "m_CustomSlotLabel": "",
@@ -6150,7 +6150,7 @@
     "m_CustomColors": {
         "m_SerializableColors": []
     },
-    "m_Space": 2
+    "m_Space": 0
 }
 
 {
@@ -6221,7 +6221,7 @@
     "m_DefaultRefNameVersion": 1,
     "m_RefNameGeneratedByDisplayName": "NormalStrength",
     "m_DefaultReferenceName": "_NormalStrength",
-    "m_OverrideReferenceName": "",
+    "m_OverrideReferenceName": "Vector1_8e760635099b4147956bb9600d13cac2",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
     "m_CustomSlotLabel": "",
@@ -6551,7 +6551,7 @@
     "m_DefaultRefNameVersion": 1,
     "m_RefNameGeneratedByDisplayName": "Mask",
     "m_DefaultReferenceName": "_Mask",
-    "m_OverrideReferenceName": "",
+    "m_OverrideReferenceName": "_MaskTexture",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
     "m_CustomSlotLabel": "",
@@ -6567,7 +6567,7 @@
     "isMainTexture": false,
     "useTilingAndOffset": false,
     "m_Modifiable": true,
-    "m_DefaultType": 0
+    "m_DefaultType": 1
 }
 
 {
@@ -6581,7 +6581,7 @@
     "m_DefaultRefNameVersion": 1,
     "m_RefNameGeneratedByDisplayName": "Metallic",
     "m_DefaultReferenceName": "_Metallic",
-    "m_OverrideReferenceName": "",
+    "m_OverrideReferenceName": "Vector1_b160a6374fb04a77b114bb611b8c55e4",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
     "m_CustomSlotLabel": "",
@@ -7655,7 +7655,7 @@
     "m_DefaultRefNameVersion": 1,
     "m_RefNameGeneratedByDisplayName": "NormalMap",
     "m_DefaultReferenceName": "_NormalMap",
-    "m_OverrideReferenceName": "",
+    "m_OverrideReferenceName": "Texture2D_3c9e15eb8c374e0495f36ea3d57473ab",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
     "m_CustomSlotLabel": "",

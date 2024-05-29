@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using Input = UnityEngine.Input;
 
 public class PlayerInput : MonoBehaviour
 {
@@ -9,10 +8,7 @@ public class PlayerInput : MonoBehaviour
 
     [SerializeField] private FixedJoystick _joystick;
 
-    private bool _playerInputEnabled = false;
-
-    public Vector3 MousePosition { get; private set; }
-
+    private bool _playerInputEnabled = true;
 
     public void SetPlayerInput(bool enable)
     {
@@ -21,10 +17,9 @@ public class PlayerInput : MonoBehaviour
 
     private void Update()
     {
-        if (_playerInputEnabled) return;
+        if (!_playerInputEnabled) return;
 
         GetMovementInput();
-        GetFireInput();
     }
 
     private void GetMovementInput()
@@ -37,11 +32,10 @@ public class PlayerInput : MonoBehaviour
         OnMovementEvent?.Invoke(moveInput.normalized);
     }
 
-    private void GetFireInput()
+    public void FireButtonClick()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            OnFireEvent?.Invoke();
-        }
+        if (!_playerInputEnabled) return;
+
+        OnFireEvent?.Invoke();
     }
 }

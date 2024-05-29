@@ -17,7 +17,7 @@ public class Paintable : MonoBehaviour
 
     private Renderer rend;
 
-    private int maskTextureID = Shader.PropertyToID("_Mask");
+    private int maskTextureID = Shader.PropertyToID("_MaskTexture");
 
     public RenderTexture getMask() => maskRenderTexture;
     public RenderTexture getUVIslands() => uvIslandsRenderTexture;
@@ -47,9 +47,9 @@ public class Paintable : MonoBehaviour
 
     private void OnDisable()
     {
-        maskRenderTexture.Release();
-        uvIslandsRenderTexture.Release();
-        extendIslandsRenderTexture.Release();
-        supportTexture.Release();
+        maskRenderTexture?.Release();
+        uvIslandsRenderTexture?.Release();
+        extendIslandsRenderTexture?.Release();
+        supportTexture?.Release();
     }
 }
