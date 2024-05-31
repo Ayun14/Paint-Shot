@@ -9,16 +9,20 @@ public class Gun : MonoBehaviour
     private void Start()
     {
         _playerInput.OnFireEvent += PlayShootParticle;
+        _playerInput.OnFireStopEvent += StopShootParticle;
     }
 
     private void OnDestroy()
     {
         _playerInput.OnFireEvent -= PlayShootParticle;
+        _playerInput.OnFireStopEvent -= StopShootParticle;
     }
     
     private void PlayShootParticle()
     {
+        _shootParticle.transform.position = _shootTrm.transform.position;
         _shootParticle.Play();
+        Debug.Log("½ÇÇà");
     }
     
     private void StopShootParticle()

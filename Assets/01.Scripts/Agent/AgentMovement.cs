@@ -60,11 +60,15 @@ public class AgentMovement : MonoBehaviour, IMovement
         if (movement == Vector3.zero)
         {
             _playerAnimation.ChangeAnimation(AnimationType.Idle.ToString());
+            _playerAnimation.StopRunAnimation();
+            _playerAnimation.PlayIdleAnimation();
             StopImmediately();
         }
         else
         {
             _playerAnimation.ChangeAnimation(AnimationType.Walk.ToString());
+            _playerAnimation.StopRunAnimation();
+            _playerAnimation.PlayRunAnimation();
             _velocity = movement * Time.fixedDeltaTime;
 
             if (_velocity.sqrMagnitude > 0 && isRotation)

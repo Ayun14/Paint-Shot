@@ -32,7 +32,6 @@ public class PaintManager : Singleton<PaintManager>
 
         // 새로운 명령 버퍼 생성
         command = new CommandBuffer();
-        command.name = "CommmandBuffer - " + gameObject.name;
     }
 
     public void initTextures(Paintable paintable)
@@ -77,6 +76,7 @@ public class PaintManager : Singleton<PaintManager>
         paintMaterial.SetFloat(radiusID, radius);
         paintMaterial.SetTexture(textureID, support);
         paintMaterial.SetColor(colorID, color ?? Color.red);
+
         extendMaterial.SetFloat(uvOffsetID, paintable.extendsIslandOffset);
         extendMaterial.SetTexture(uvIslandsID, uvIslands);
 

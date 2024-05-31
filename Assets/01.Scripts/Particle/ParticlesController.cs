@@ -22,6 +22,8 @@ public class ParticlesController : MonoBehaviour
     {
         if (_particleSystem == null) return;
 
+        Debug.Log(other.name);
+
         int numCollisionEvents = 
             _particleSystem.GetCollisionEvents(other, _collisionEventList);
 
