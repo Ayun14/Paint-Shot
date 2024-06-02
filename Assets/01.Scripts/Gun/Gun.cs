@@ -22,7 +22,6 @@ public class Gun : MonoBehaviour
     {
         _shootParticle.transform.position = _shootTrm.transform.position;
         _shootParticle.Play();
-        Debug.Log("½ÇÇà");
     }
     
     private void StopShootParticle()

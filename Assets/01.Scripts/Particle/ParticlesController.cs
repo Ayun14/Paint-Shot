@@ -8,6 +8,7 @@ public class ParticlesController : MonoBehaviour
     [SerializeField] private float _strength = 1;
     [SerializeField] private float _hardness = 1;
     [SerializeField] private Color _paintColor;
+    [SerializeField] private string _id;
 
     private ParticleSystem _particleSystem;
     private List<ParticleCollisionEvent> _collisionEventList;
@@ -22,8 +23,6 @@ public class ParticlesController : MonoBehaviour
     {
         if (_particleSystem == null) return;
 
-        Debug.Log(other.name);
-
         int numCollisionEvents = 
             _particleSystem.GetCollisionEvents(other, _collisionEventList);
 
@@ -37,6 +36,7 @@ public class ParticlesController : MonoBehaviour
                 float radius = Random.Range(_minRadius, _maxRadius);
                 PaintManager.Instance.paint
                     (p, pos, radius, _hardness, _strength, _paintColor);
+                GroundManager.Instance.GroundPainted(pos, radius, _id);
             }
         }
     }
