@@ -7,8 +7,8 @@ public class ParticlesController : MonoBehaviour
     [SerializeField] private float _maxRadius = 0.3f;
     [SerializeField] private float _strength = 1;
     [SerializeField] private float _hardness = 1;
+    [SerializeField] private Transform _owner;
     [SerializeField] private Color _paintColor;
-    [SerializeField] private string _id;
 
     private ParticleSystem _particleSystem;
     private List<ParticleCollisionEvent> _collisionEventList;
@@ -34,9 +34,13 @@ public class ParticlesController : MonoBehaviour
             {
                 Vector3 pos = _collisionEventList[i].intersection;
                 float radius = Random.Range(_minRadius, _maxRadius);
+
+                // 물감 그리기
                 PaintManager.Instance.paint
                     (p, pos, radius, _hardness, _strength, _paintColor);
-                GroundManager.Instance.GroundPainted(pos, radius, _id);
+
+                // 누구 땅인지
+                GroundManager.Instance.GroundPainted(pos, radius, _owner.name);
             }
         }
     }

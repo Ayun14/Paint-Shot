@@ -11,7 +11,7 @@ public class AgentMovement : MonoBehaviour, IMovement
     private Quaternion _targetRotation;
 
     private PlayerInput _playerInput;
-    private PlayerAnimation _playerAnimation;
+    private AgentAnimation _playerAnimation;
     private Rigidbody _rigid;
 
     private void Awake()

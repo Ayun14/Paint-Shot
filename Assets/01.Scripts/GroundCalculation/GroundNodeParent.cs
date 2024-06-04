@@ -3,9 +3,7 @@ using UnityEngine;
 
 public class GroundNodeParent : MonoBehaviour
 {
-    private List<GroundNode> _groundNodeList = new List<GroundNode>();
-
-    [SerializeField] private GameObject _node;
+    [SerializeField] private Transform _node;
 
     private Vector3 _parentSize;
     private Vector3 _nodeSize = new Vector3(1f, 0.1f, 1f);
@@ -38,16 +36,19 @@ public class GroundNodeParent : MonoBehaviour
         {
             for (int j = 0; j < x; ++j)
             {
-                GameObject node = Instantiate(_node);
+                Transform node = Instantiate(_node);
 
                 Vector3 spawnPos = new Vector3(
                     startPos.x - (_nodeSize.x * j),
                     startPos.y,
                     startPos.z + (_nodeSize.z * i));
 
-                node.transform.position = spawnPos;
-                node.transform.parent = transform;
-                node.transform.rotation = Quaternion.identity;
+                node.position = spawnPos;
+                node.parent = transform;
+                node.rotation = Quaternion.identity;
+
+                if (node.TryGetComponent(out GroundNode groundNode))
+                    GroundManager.Instance.AddNodeList(groundNode);
             }
         }
     }
