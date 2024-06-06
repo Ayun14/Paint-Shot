@@ -3,12 +3,16 @@ using UnityEngine;
 
 public class ParticlesController : MonoBehaviour
 {
+    [Header("Paint Setting")]
     [SerializeField] private float _minRadius = 0.1f;
     [SerializeField] private float _maxRadius = 0.3f;
     [SerializeField] private float _strength = 1;
     [SerializeField] private float _hardness = 1;
-    [SerializeField] private Transform _owner;
     [SerializeField] private Color _paintColor;
+    [SerializeField] private Transform _owner;
+
+    [Header("Attack Setting")]
+    [SerializeField] private int _damage = 5;
 
     private ParticleSystem _particleSystem;
     private List<ParticleCollisionEvent> _collisionEventList;
@@ -26,9 +30,7 @@ public class ParticlesController : MonoBehaviour
         int numCollisionEvents = 
             _particleSystem.GetCollisionEvents(other, _collisionEventList);
 
-        Paintable p = other.GetComponent<Paintable>();
-
-        if (p != null)
+        if (other.TryGetComponent(out Paintable p))
         {
             for (int i = 0; i < numCollisionEvents; i++)
             {
@@ -42,6 +44,12 @@ public class ParticlesController : MonoBehaviour
                 // ´©±¸ ¶¥ÀÎÁö
                 GroundManager.Instance.GroundPainted(pos, radius, _owner.name);
             }
+        }
+        
+        if (other.TryGetComponent(out IDamageable health))
+        {
+            for (int i = 0; i < numCollisionEvents; i++)
+                health.ApplyDamage(_damage);
         }
     }
 }

@@ -1,45 +1,68 @@
+using System;
 using UnityEngine;
 
-public class Gun : MonoBehaviour
+public abstract class Gun : MonoBehaviour
 {
-    [SerializeField] private Transform _shootTrm;
-    [SerializeField] private ParticleSystem _shootParticle;
-    [SerializeField] private PlayerInput _playerInput;
+    public Action<float> OnPaintChange;
 
-    private bool _isPainting = false;
+    [SerializeField] protected Transform _shootTrm;
+    [SerializeField] protected ParticleSystem _shootParticle;
 
-    private int _paintAmount = 100; // 예시 값
+    protected bool _isPainting = false;
 
-    private void Start()
+    private float _usePaintAmount = 2; // 쏘면 사용되는 페인트 양
+    private float _currentPaintAmount = 0;
+    private float _paintMax = 100;
+
+    private float _currentTime;
+    private float _paintTime = 0.3f; // 페인트 닳는 시간
+
+    protected virtual void Start()
     {
-        _playerInput.OnFireEvent += PlayPaintParticle;
-        _playerInput.OnFireStopEvent += StotPaintParticle;
-
+        _currentPaintAmount = _paintMax;
         _shootParticle.transform.position = _shootTrm.transform.position;
     }
 
-    private void OnDestroy()
+    protected virtual void Update()
     {
-        _playerInput.OnFireEvent -= PlayPaintParticle;
-        _playerInput.OnFireStopEvent -= StotPaintParticle;
+        if (_isPainting)
+        {
+            _currentTime += Time.deltaTime;
+            if (_currentTime >= _paintTime)
+            {
+                _currentTime = 0;
+                SetPaintAmount(_usePaintAmount);
+            }
+
+            if (_currentPaintAmount <= 0)
+                StotPaintParticle();
+        }
     }
-    
-    private void PlayPaintParticle()
+
+    public void PlayPaintParticle()
     {
+        if (_currentPaintAmount <= 0) return;
+
         _isPainting = true;
         _shootParticle.Play();
     }
-    
-    private void StotPaintParticle()
+
+    public void StotPaintParticle()
     {
         _isPainting = false;
         _shootParticle.Stop();
     }
 
-    public void SetPaintAmount(int paintAmount, bool isBool = false)
+    public void SetPaintAmount(float paintAmount)
     {
-        int targetAmount = paintAmount;
-        // 자연스럽게 올라가기
-        // _paintAmount = targetAmount;
+        if (_currentPaintAmount <= 0)
+        {
+            _currentPaintAmount = 0;
+            return;
+        }
+
+        _currentPaintAmount -= paintAmount;
+        float paintValue = _currentPaintAmount / _paintMax;
+        OnPaintChange?.Invoke(paintValue);
     }
 }

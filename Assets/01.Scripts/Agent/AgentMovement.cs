@@ -5,7 +5,6 @@ public class AgentMovement : MonoBehaviour, IMovement
     [SerializeField] private float moveSpeed;
 
     private Vector3 _velocity = Vector3.zero;
-
     public Vector3 Velocity => _velocity;
 
     private Quaternion _targetRotation;
@@ -62,13 +61,15 @@ public class AgentMovement : MonoBehaviour, IMovement
             _playerAnimation.ChangeAnimation(AnimationType.Idle.ToString());
             _playerAnimation.StopRunAnimation();
             _playerAnimation.PlayIdleAnimation();
+
             StopImmediately();
         }
         else
         {
-            _playerAnimation.ChangeAnimation(AnimationType.Walk.ToString());
+            _playerAnimation.ChangeAnimation(AnimationType.Run.ToString());
             _playerAnimation.StopRunAnimation();
             _playerAnimation.PlayRunAnimation();
+
             _velocity = movement * Time.fixedDeltaTime;
 
             if (_velocity.sqrMagnitude > 0 && isRotation)

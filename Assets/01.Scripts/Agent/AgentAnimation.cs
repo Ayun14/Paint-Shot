@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum AnimationType
 {
-    Idle, Walk
+    Idle, Run
 }
 
 public class AgentAnimation : MonoBehaviour

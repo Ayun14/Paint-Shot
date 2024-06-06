@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyIdleState : EnemyState<EnemyState>
@@ -11,7 +9,14 @@ public class EnemyIdleState : EnemyState<EnemyState>
     public override void Enter()
     {
         base.Enter();
-        _enemyBase.EnemyAnimation.ChangeAnimation(EnemyState.Idle.ToString());
+        _enemyBase.EnemyAnimation.PlayIdleAnimation();
+        _enemyBase.EnemyMovement.SetMovement(Vector3.zero);
+    }
+
+    public override void Eixt()
+    {
+        _enemyBase.EnemyAnimation.StopIdleAnimation();
+        base.Eixt();
     }
 
     public override void UpdateState()
