@@ -13674,7 +13674,7 @@ ParticleSystem:
     radiusScale: 0.3
     collidesWith:
       serializedVersion: 2
-      m_Bits: 55
+      m_Bits: 887
     maxCollisionShapes: 256
     quality: 0
     voxelSize: 0.5
@@ -14727,7 +14727,8 @@ MonoBehaviour:
   _strength: 1
   _hardness: 0.01
   _paintColor: {r: 1, g: 0.37647063, b: 0.52156866, a: 1}
-  _id: Player
+  _owner: {fileID: 0}
+  _damage: 5
 --- !u!1 &6208109909338601474
 GameObject:
   m_ObjectHideFlags: 0

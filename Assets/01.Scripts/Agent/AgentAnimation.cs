@@ -26,6 +26,14 @@ public class AgentAnimation : MonoBehaviour
         _animator.SetBool(_currentAnimHash, true);
     }
 
+    public void DeathAnimation()
+    {
+        StopIdleAnimation();
+        StopRunAnimation();
+        StopPaintAnimation();
+        _animator.SetTrigger("Death");
+    }
+
     public void PlayIdleAnimation()
     {
         _animator.SetLayerWeight(1, 1);

@@ -3,14 +3,8 @@ using UnityEngine.UI;
 
 public abstract class UIBarController : MonoBehaviour
 {
+    [SerializeField] protected Health _health;
     [SerializeField] private Slider _HpSlider;
-
-    private Health _health;
-
-    protected virtual void Start()
-    {
-        _health = GetComponentInParent<Health>();
-    }
 
     public void HandleHpChange()
     {
@@ -21,7 +15,7 @@ public abstract class UIBarController : MonoBehaviour
     private void LateUpdate() // 카메라 바라보기
     {
         Transform mainCamTrm = Camera.main.transform;
-        Vector3 lookDirection = (transform.position - mainCamTrm.position).normalized;
-        transform.rotation = Quaternion.LookRotation(lookDirection);
+        Vector3 lookDirection = transform.position + mainCamTrm.rotation * Vector3.forward;
+        transform.LookAt(lookDirection, mainCamTrm.rotation * Vector3.up);
     }
 }

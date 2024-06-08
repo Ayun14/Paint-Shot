@@ -16,7 +16,7 @@ public class EnemyAttackState : EnemyState<EnemyState>
     public override void Eixt()
     {
         _enemyBase.EnemyAnimation.StopPaintAnimation();
-        _enemyBase.EnemyGun.StotPaintParticle();
+        _enemyBase.EnemyGun.StopPaintParticle();
 
         base.Eixt();
     }

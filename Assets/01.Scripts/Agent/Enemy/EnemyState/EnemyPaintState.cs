@@ -3,7 +3,7 @@ using UnityEngine;
 public class EnemyPaintState : EnemyState<EnemyState>
 {
     private float _currentTime;
-    private float _dirChangeMinTime = 0.5f;
+    private float _dirChangeMinTime = 0.8f;
     private float _dirChangeMaxTime = 1.5f;
     private float _dirChangeTime;
 
@@ -24,7 +24,7 @@ public class EnemyPaintState : EnemyState<EnemyState>
     public override void Eixt()
     {
         _enemyBase.EnemyAnimation.StopPaintAnimation();
-        _enemyBase.EnemyGun.StotPaintParticle();
+        _enemyBase.EnemyGun.StopPaintParticle();
 
         base.Eixt();
     }
@@ -40,7 +40,7 @@ public class EnemyPaintState : EnemyState<EnemyState>
     private void ChangeDirection()
     {
         _currentTime += Time.deltaTime;
-        if (_currentTime >= _dirChangeTime)
+        if (_currentTime >= _dirChangeTime || _enemyBase.IsObstacleInFront())
         {
             _enemyBase.ChangeRandomDirection();
             _currentTime = 0;

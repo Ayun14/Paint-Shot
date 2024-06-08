@@ -12,7 +12,7 @@ public class ParticlesController : MonoBehaviour
     [SerializeField] private Transform _owner;
 
     [Header("Attack Setting")]
-    [SerializeField] private int _damage = 5;
+    [SerializeField] private int _damage = 1;
 
     private ParticleSystem _particleSystem;
     private List<ParticleCollisionEvent> _collisionEventList;
@@ -47,9 +47,6 @@ public class ParticlesController : MonoBehaviour
         }
         
         if (other.TryGetComponent(out IDamageable health))
-        {
-            for (int i = 0; i < numCollisionEvents; i++)
-                health.ApplyDamage(_damage);
-        }
+            health.ApplyDamage(_damage);
     }
 }

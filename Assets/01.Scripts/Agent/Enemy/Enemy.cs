@@ -1,8 +1,9 @@
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 
 public enum EnemyState
 {
-    Idle, Paint, Attack
+    Idle, Paint, Attack, Death
 }
 
 public class Enemy : MonoBehaviour
@@ -45,6 +46,8 @@ public class Enemy : MonoBehaviour
             new EnemyPaintState(this, StateMachine, EnemyState.Paint.ToString()));
         StateMachine.AddState(EnemyState.Attack,
             new EnemyAttackState(this, StateMachine, EnemyState.Attack.ToString()));
+        StateMachine.AddState(EnemyState.Death,
+            new EnemyDeathState(this, StateMachine, EnemyState.Death.ToString()));
     }
 
     private void Start()
@@ -69,23 +72,31 @@ public class Enemy : MonoBehaviour
         return null;
     }
 
-    // 사이에 장애물이 있는지
-    public bool IsObstacleInLine(float distance, Vector3 direction)
-    {
-        return Physics.Raycast(transform.position, direction, distance, _whatIsObstacle);
-    }
-
     // 주변에 칠할 땅이 있는지 (이거 안쓸거 같긴함
     public bool IsCanPaint()
     {
-        RaycastHit[] colliders = Physics.SphereCastAll(paintCheckTrm.position,
-            paintDistance, Vector3.up, 0, _whatIsNode);
-        foreach (RaycastHit collider in colliders)
+        Collider[] colliders = Physics.OverlapSphere(paintCheckTrm.position,
+            paintDistance, _whatIsNode);
+        foreach (Collider collider in colliders)
         {
             if (collider.transform.TryGetComponent(out GroundNode node))
                 if (node.nodeId != transform.name) return false;
         }
         return true;
+    }
+
+    // 앞이 장애물이 있는지
+    public bool IsObstacleInFront()
+    {
+        Collider[] colliders = Physics.OverlapSphere(paintCheckTrm.position,
+            paintDistance, _whatIsObstacle);
+        return colliders.Length > 0;
+    }
+
+    public void SetDeath()
+    {
+        StateMachine.ChangeState(EnemyState.Death);
+        colliderCompo.enabled = false;
     }
 
     public void ChangeRandomDirection()

@@ -6,7 +6,7 @@ public class PlayerUIBarController : UIBarController
     [SerializeField] private Slider _PaintSlider;
     [SerializeField] private Gun _gun;
 
-    protected override void Start()
+    private void Start()
     {
         _gun.OnPaintChange += HandlePaintChange;
     }

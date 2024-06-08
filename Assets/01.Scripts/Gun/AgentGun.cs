@@ -9,12 +9,12 @@ public class AgentGun : Gun
         base.Start();
 
         _playerInput.OnFireEvent += PlayPaintParticle;
-        _playerInput.OnFireStopEvent += StotPaintParticle;
+        _playerInput.OnFireStopEvent += StopPaintParticle;
     }
 
     private void OnDestroy()
     {
         _playerInput.OnFireEvent -= PlayPaintParticle;
-        _playerInput.OnFireStopEvent -= StotPaintParticle;
+        _playerInput.OnFireStopEvent -= StopPaintParticle;
     }
 }

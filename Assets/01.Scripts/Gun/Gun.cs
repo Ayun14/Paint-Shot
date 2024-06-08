@@ -35,7 +35,7 @@ public abstract class Gun : MonoBehaviour
             }
 
             if (_currentPaintAmount <= 0)
-                StotPaintParticle();
+                StopPaintParticle();
         }
     }
 
@@ -47,7 +47,7 @@ public abstract class Gun : MonoBehaviour
         _shootParticle.Play();
     }
 
-    public void StotPaintParticle()
+    public void StopPaintParticle()
     {
         _isPainting = false;
         _shootParticle.Stop();
