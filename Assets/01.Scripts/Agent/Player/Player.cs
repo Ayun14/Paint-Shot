@@ -2,20 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : Singleton<Player>
 {
     private CapsuleCollider _collider;
-    private PlayerInput _playerInput;
+    public PlayerInput PlayerInput { get; private set; }
+    public AgentMovement PlayerMovement { get; private set; }
 
     private void Awake()
     {
         _collider = GetComponent<CapsuleCollider>();
-        _playerInput = GetComponent<PlayerInput>();
+        PlayerInput = GetComponent<PlayerInput>();
+        PlayerMovement = GetComponent<AgentMovement>();
+    }
+
+    public void SetRevival() // 부활 설정
+    {
+        PlayerInput.SetPlayerInput(true);
+        _collider.enabled = true;
     }
 
     public void SetDeath()
     {
-        _playerInput.SetPlayerInput(false);
+        PlayerInput.SetPlayerInput(false);
+        PlayerMovement.StopImmediately();
         _collider.enabled = false;
+    }
+
+    public void SetGameOver()
+    {
+        PlayerMovement.StopImmediately();
     }
 }

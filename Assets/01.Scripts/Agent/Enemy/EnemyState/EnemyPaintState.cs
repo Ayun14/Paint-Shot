@@ -40,11 +40,14 @@ public class EnemyPaintState : EnemyState<EnemyState>
     private void ChangeDirection()
     {
         _currentTime += Time.deltaTime;
-        if (_currentTime >= _dirChangeTime || _enemyBase.IsObstacleInFront())
+        if (_currentTime >= _dirChangeTime)
         {
             _enemyBase.ChangeRandomDirection();
             _currentTime = 0;
         }
+
+        if (_enemyBase.IsObstacleInFront())
+            _enemyBase.EnemyMovement.SetMovement(-_enemyBase.EnemyMovement.Velocity);
     }
 
     private void CheckPlayerInAttackRange()
