@@ -8,8 +8,8 @@ public class ParticlesController : MonoBehaviour
     [SerializeField] private float _maxRadius = 0.3f;
     [SerializeField] private float _strength = 1;
     [SerializeField] private float _hardness = 1;
-    [SerializeField] private Color _paintColor;
     [SerializeField] private Transform _owner;
+    public Color paintColor;
 
     [Header("Attack Setting")]
     [SerializeField] private int _damage = 1;
@@ -39,7 +39,7 @@ public class ParticlesController : MonoBehaviour
 
                 // 물감 그리기
                 PaintManager.Instance.paint
-                    (p, pos, radius, _hardness, _strength, _paintColor);
+                    (p, pos, radius, _hardness, _strength, paintColor);
 
                 // 누구 땅인지
                 GroundManager.Instance.GroundPainted(pos, radius, _owner.name);

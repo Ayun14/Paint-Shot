@@ -1,19 +1,95 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class StartSceneUI : MonoBehaviour
 {
+    [SerializeField] private List<ButtonClick> _colorButtonList 
+        = new List<ButtonClick>();
+    
     [SerializeField] private Image _colorSelectPanel;
     [SerializeField] private Image _settingPanel;
+
+    private bool _colorSelectPanelEnable = false;
+    private bool _settingPanelEnable = false;
 
     public void PlayButtonClick()
     {
         // 페이드인 처리
-        SceneManager.LoadScene("Main");
+        SceneManager.LoadScene(1);
     }
 
     public void ExitButtonClick()
     {
+        Application.Quit();
     }
+
+    public void ColorSelectButtonClick()
+    {
+        _colorSelectPanelEnable = !_colorSelectPanelEnable;
+        _colorSelectPanel.gameObject.SetActive(_colorSelectPanelEnable);
+    }
+
+    public void SettingButtonClick()
+    {
+        _settingPanelEnable = !_settingPanelEnable;
+        _settingPanel.gameObject.SetActive(_settingPanelEnable);
+    }
+
+    #region Color 버튼 관련
+    private void CheckedButtonOff()
+    {
+        foreach (ButtonClick button in _colorButtonList)
+            button.OffCheckImage();
+    }
+
+    public void ColorRedButtonClick()
+    {
+        CheckedButtonOff();
+        AgentManager.Instance.ChangePlayerColor(AgentColor.Red);
+    }
+
+    public void ColorOrangeButtonClick()
+    {
+        CheckedButtonOff();
+        AgentManager.Instance.ChangePlayerColor(AgentColor.Orange);
+    }
+
+    public void ColorYellowButtonClick()
+    {
+        CheckedButtonOff();
+        AgentManager.Instance.ChangePlayerColor(AgentColor.Yellow);
+    }
+
+    public void ColorGreenButtonClick()
+    {
+        CheckedButtonOff();
+        AgentManager.Instance.ChangePlayerColor(AgentColor.Green);
+    }
+
+    public void ColorBlueButtonClick()
+    {
+        CheckedButtonOff();
+        AgentManager.Instance.ChangePlayerColor(AgentColor.Blue);
+    }
+
+    public void ColorMintButtonClick()
+    {
+        CheckedButtonOff();
+        AgentManager.Instance.ChangePlayerColor(AgentColor.Mint);
+    }
+
+    public void ColorPinkButtonClick()
+    {
+        CheckedButtonOff();
+        AgentManager.Instance.ChangePlayerColor(AgentColor.Pink);
+    }
+
+    public void ColorPurpleButtonClick()
+    {
+        CheckedButtonOff();
+        AgentManager.Instance.ChangePlayerColor(AgentColor.Purple);
+    }
+    #endregion
 }

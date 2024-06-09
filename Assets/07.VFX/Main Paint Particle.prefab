@@ -14726,7 +14726,7 @@ MonoBehaviour:
   _maxRadius: 1.5
   _strength: 1
   _hardness: 0.01
-  _paintColor: {r: 1, g: 0.37647063, b: 0.52156866, a: 1}
+  _paintColor: {r: 0.7686275, g: 0.08235294, b: 0.13725491, a: 1}
   _owner: {fileID: 0}
   _damage: 5
 --- !u!1 &6208109909338601474

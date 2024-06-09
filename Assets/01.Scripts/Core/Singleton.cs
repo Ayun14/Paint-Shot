@@ -10,7 +10,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         get
         {
             if (isDestroyed)
-                _instance = null; //이미 파괴되었다면 null처리하고 다시 찾아라.
+                _instance = null;
 
             if (_instance == null)
             {
@@ -18,7 +18,10 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
                 if (_instance == null)
                     Debug.LogError($"{typeof(T).Name} singleton is not exist");
                 else
+                {
                     isDestroyed = false;
+                    DontDestroyOnLoad(_instance);
+                }
             }
 
             return _instance;

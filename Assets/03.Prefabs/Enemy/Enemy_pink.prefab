@@ -397,7 +397,7 @@ GameObject:
   - component: {fileID: 6253631955671672298}
   - component: {fileID: 3062529343012913759}
   m_Layer: 9
-  m_Name: Enemy_pink
+  m_Name: Enemy_Pink
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1016,15 +1016,15 @@ PrefabInstance:
       objectReference: {fileID: 5105671577019733827}
     - target: {fileID: 3141719851807860622, guid: b8ce3c9b9edf98343b55f74c8669524b, type: 3}
       propertyPath: _paintColor.b
-      value: 0.93725497
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3141719851807860622, guid: b8ce3c9b9edf98343b55f74c8669524b, type: 3}
       propertyPath: _paintColor.g
-      value: 0.28627452
+      value: 0.38431376
       objectReference: {fileID: 0}
     - target: {fileID: 3141719851807860622, guid: b8ce3c9b9edf98343b55f74c8669524b, type: 3}
       propertyPath: _paintColor.r
-      value: 0.8352942
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6208109909338601474, guid: b8ce3c9b9edf98343b55f74c8669524b, type: 3}
       propertyPath: m_Name

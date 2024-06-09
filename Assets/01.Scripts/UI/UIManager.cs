@@ -84,7 +84,7 @@ public class UIManager : Observer
 
     private void GameOver()
     {
-        Player.Instance.SetGameOver();
+        // 플레이어, 적 설정해줘야함
         _gameController.ChangeGameState(GameState.Over);
     }
 }
