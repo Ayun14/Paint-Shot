@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public enum AgentColor
 {
@@ -10,9 +11,13 @@ public class AgentManager : Singleton<AgentManager>
 {
     [SerializeField] private List<Transform> _enemyList = new List<Transform>();
     [SerializeField] private List<Material> _colorMatList = new List<Material>();
+    [SerializeField] private int _enemySpawnCnt;
 
     private AgentColor _agentColor;
     public AgentColor AgentColor => _agentColor;
+
+    private Vector3 _agentSpawnPos;
+    public Vector3 AgentSpawnPos => _agentSpawnPos;
 
     public void ChangePlayerColor(AgentColor newColor)
     {
@@ -22,8 +27,7 @@ public class AgentManager : Singleton<AgentManager>
 
     public Material GetAgentMat()
     {
-        Debug.Log(_agentColor);
-        foreach(var mat  in _colorMatList)
+        foreach (var mat in _colorMatList)
         {
             if (mat.name == $"{_agentColor}ParticleMat")
                 return mat;
@@ -32,12 +36,76 @@ public class AgentManager : Singleton<AgentManager>
         return null;
     }
 
-    private void EnemySpawn()
+    public void AgentSpawn()
     {
-        foreach (var enemy  in _enemyList)
+        for (int i = 0; i <= _enemySpawnCnt; ++i)
         {
-            if (enemy.name == $"Enemy_{_agentColor}") continue;
-            // 나머지 중에 3명 소환
+            float angle = ((Mathf.PI * 2) / (_enemySpawnCnt + 1)) * i;
+
+            float radius = 12f;
+            float x = Mathf.Cos(angle) * radius;
+            float z = Mathf.Sin(angle) * radius;
+
+            Vector3 spawnPos = new Vector3(x, 0, z);
+
+            if (i == 0) // Player
+            {
+                _agentSpawnPos = spawnPos;
+                continue;
+            }
+
+            Quaternion quaternion = Quaternion.LookRotation(-spawnPos);
+            Transform obj = Instantiate(PickRandomEnemy(), spawnPos,
+                quaternion, transform);
+
+            if (obj.TryGetComponent(out Enemy enemy))
+                enemy.spawnPos = spawnPos;
+        }
+    }
+
+    private Transform PickRandomEnemy()
+    {
+        Transform enemy = null;
+
+        while (true)
+        {
+            int rand = Random.Range(0, _enemyList.Count);
+            if (_enemyList[rand].name == $"Enemy_{_agentColor}") continue;
+
+            bool isSame = false;
+            for (int i = 0; i < transform.childCount; ++i)
+            {
+                if (_enemyList[rand].name == $"{transform.GetChild(i).name}(Clone)")
+                {
+                    isSame = true;
+                    break;
+                }
+            }
+
+            if (isSame) continue;
+
+            enemy = _enemyList[rand];
+            break;
+        }
+
+        return enemy;
+    }
+
+    public void GameStart()
+    {
+        for (int i = 0; i < transform.childCount; ++i)
+        {
+            if (transform.GetChild(i).TryGetComponent(out Enemy enemy))
+                enemy.GameStart();
+        }
+    }
+
+    public void GameOver()
+    {
+        for (int i = 0; i < transform.childCount; ++i)
+        {
+            if (transform.GetChild(i).TryGetComponent(out Enemy enemy))
+                enemy.GameOver();
         }
     }
 }

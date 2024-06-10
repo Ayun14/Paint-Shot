@@ -1,4 +1,6 @@
+using System.Diagnostics;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 public enum GameState
 {
@@ -15,16 +17,22 @@ public class GameController : Subject
 
     private CameraController _cameraController;
     private UIManager _uiManager;
+    private AgentController _agentController;
 
     private void Awake()
     {
         _cameraController = (CameraController)FindObjectOfType(typeof(CameraController));
         _uiManager = (UIManager)FindObjectOfType(typeof(UIManager));
+        _agentController = (AgentController)FindObjectOfType(typeof(AgentController));
 
         if (_cameraController)
             Attach(_cameraController);
         if (_uiManager)
             Attach(_uiManager);
+        if (_agentController)
+            Attach(_agentController);
+
+        NotifyObservers();
     }
 
     private void OnDestroy()
@@ -33,11 +41,6 @@ public class GameController : Subject
             Detach(_cameraController);
         if (_uiManager)
             Detach(_uiManager);
-    }
-
-    private void Start()
-    {
-        NotifyObservers();
     }
 
     public void ChangeGameState(GameState newGameState)

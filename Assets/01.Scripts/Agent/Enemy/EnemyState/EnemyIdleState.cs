@@ -10,6 +10,7 @@ public class EnemyIdleState : EnemyState<EnemyState>
     {
         base.Enter();
         _enemyBase.EnemyAnimation.PlayIdleAnimation();
+        _enemyBase.EnemyGun.StopPaintParticle();
         _enemyBase.EnemyMovement.SetMovement(Vector3.zero);
     }
 
@@ -17,16 +18,5 @@ public class EnemyIdleState : EnemyState<EnemyState>
     {
         _enemyBase.EnemyAnimation.StopIdleAnimation();
         base.Eixt();
-    }
-
-    public override void UpdateState()
-    {
-        base.UpdateState();
-
-        if (_enemyBase.IsCanPaint())
-            _enemyBase.StateMachine.ChangeState(EnemyState.Paint);
-
-        if (_enemyBase.IsPlayerDetected())
-            _enemyBase.StateMachine.ChangeState(EnemyState.Attack);
     }
 }

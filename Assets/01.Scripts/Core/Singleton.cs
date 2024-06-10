@@ -2,34 +2,39 @@ using UnityEngine;
 
 public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
-    private static T _instance = null;
-    private static bool isDestroyed = false;
-
+    private static bool shuttingDown = false;
+    private static object locker = new object();
+    private static T instance = null;
     public static T Instance
     {
         get
         {
-            if (isDestroyed)
-                _instance = null;
-
-            if (_instance == null)
+            lock (locker)
             {
-                _instance = GameObject.FindObjectOfType<T>();
-                if (_instance == null)
-                    Debug.LogError($"{typeof(T).Name} singleton is not exist");
-                else
+                if (instance == null)
                 {
-                    isDestroyed = false;
-                    DontDestroyOnLoad(_instance);
+                    instance = (T)FindAnyObjectByType(typeof(T));
+                    if (instance == null)
+                    {
+                        GameObject temp = new GameObject(typeof(T).ToString());
+                        instance = temp.AddComponent<T>();
+                    }
+                    DontDestroyOnLoad(instance);
                 }
             }
-
-            return _instance;
+            return instance;
         }
+    }
+
+    private void OnApplicationQuit() //모바일 에서 앱이 꺼졌을때
+    {
+        instance = null;
+        shuttingDown = true;
     }
 
     private void OnDestroy()
     {
-        isDestroyed = true;
+        instance = null;
+        shuttingDown = true;
     }
 }

@@ -1,5 +1,5 @@
+using System.Collections;
 using UnityEngine;
-using UnityEngine.Animations.Rigging;
 
 public enum EnemyState
 {
@@ -31,6 +31,10 @@ public class Enemy : MonoBehaviour
     [Header("Paint Settings")]
     public Transform paintCheckTrm;
     public float paintDistance; // 이만큼 영역이 다 칠해져 있는지
+
+    // 리스폰
+    [HideInInspector] public Vector3 spawnPos;
+    private float _spawnDelayTime = 3f;
 
     private void Awake()
     {
@@ -97,6 +101,29 @@ public class Enemy : MonoBehaviour
     {
         StateMachine.ChangeState(EnemyState.Death);
         colliderCompo.enabled = false;
+    }
+
+    public void SetRespawn()
+    {
+        StartCoroutine(RespawnRoutine());
+    }
+
+    private IEnumerator RespawnRoutine()
+    {
+        yield return new WaitForSeconds(_spawnDelayTime);
+
+        transform.position = spawnPos;
+        StateMachine.ChangeState(EnemyState.Paint);
+    }
+
+    public void GameStart()
+    {
+        StateMachine.ChangeState(EnemyState.Paint);
+    }
+
+    public void GameOver()
+    {
+        StateMachine.ChangeState(EnemyState.Idle);
     }
 
     public void ChangeRandomDirection()
