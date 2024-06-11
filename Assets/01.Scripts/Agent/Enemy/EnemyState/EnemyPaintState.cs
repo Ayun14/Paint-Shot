@@ -35,6 +35,9 @@ public class EnemyPaintState : EnemyState<EnemyState>
 
         ChangeDirection();
         CheckPlayerInAttackRange();
+
+        if (_enemyBase.EnemyGun.IsCanPaint())
+            _enemyBase.EnemyGun.PlayPaintParticle();
     }
 
     private void ChangeDirection()

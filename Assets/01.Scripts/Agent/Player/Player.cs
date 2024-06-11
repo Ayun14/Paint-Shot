@@ -7,23 +7,29 @@ public class Player : MonoBehaviour
     [HideInInspector] public PlayerInput PlayerInput { get; private set; }
     [HideInInspector] public AgentMovement PlayerMovement { get; private set; }
     [HideInInspector] public PlayerParticleController PlayerParticleController { get; private set; }
+    [HideInInspector] public Health PlayerHealth { get; private set; }
+    [HideInInspector] public PlayerAnimation PlayerAnimation { get; private set; }
     public AgentGun AgentGun;
     private CapsuleCollider _collider;
 
-    [HideInInspector] public Vector3 spawnPos; // 스폰, 리스폰되는 장소
+    private Vector3 _spawnPos; // 스폰, 리스폰되는 장소
 
-    private float _spawnDelayTime = 3f;
+    private float _spawnDelayTime = 6f;
 
     private void Awake()
     {
         _collider = GetComponent<CapsuleCollider>();
         PlayerInput = GetComponent<PlayerInput>();
         PlayerMovement = GetComponent<AgentMovement>();
+        PlayerHealth = GetComponent<Health>();
+        PlayerAnimation = transform.Find("Visual").GetComponent<PlayerAnimation>();
         PlayerParticleController = GetComponent<PlayerParticleController>();
     }
 
     private void Start()
     {
+        _spawnPos = transform.position;
+
         Material mat = AgentManager.Instance.GetAgentMat();
         if (mat != null)
         {
@@ -37,21 +43,21 @@ public class Player : MonoBehaviour
         _renderer.material = mat;
     }
 
-    public void Respawn(bool isInit = false) // 처음 스폰이면 isInit = ture
+    public void Respawn()
     {
-        if (isInit)
-            StartCoroutine(RespawnRoutine(0));
-        else
-            StartCoroutine(RespawnRoutine(_spawnDelayTime));
+        StartCoroutine(RespawnRoutine(_spawnDelayTime));
     }
 
     private IEnumerator RespawnRoutine(float delayTime)
     {
         yield return new WaitForSeconds(delayTime);
 
-        transform.position = spawnPos;
         PlayerInput.SetPlayerInput(true);
         _collider.enabled = true;
+        PlayerHealth.HealthReset();
+
+        PlayerAnimation.ChangeAnimation(AnimationType.Idle.ToString());
+        transform.position = _spawnPos;
     }
 
     public void SetDeath()

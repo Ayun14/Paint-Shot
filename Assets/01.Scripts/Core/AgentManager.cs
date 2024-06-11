@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Playables;
 
 public enum AgentColor
 {
@@ -75,7 +74,7 @@ public class AgentManager : Singleton<AgentManager>
             bool isSame = false;
             for (int i = 0; i < transform.childCount; ++i)
             {
-                if (_enemyList[rand].name == $"{transform.GetChild(i).name}(Clone)")
+                if ($"{_enemyList[rand].name}(Clone)" == transform.GetChild(i).name)
                 {
                     isSame = true;
                     break;

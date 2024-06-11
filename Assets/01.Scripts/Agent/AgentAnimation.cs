@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum AnimationType
 {
-    Idle, Run
+    Idle, Run, Death
 }
 
 public class AgentAnimation : MonoBehaviour
@@ -31,7 +31,7 @@ public class AgentAnimation : MonoBehaviour
         StopIdleAnimation();
         StopRunAnimation();
         StopPaintAnimation();
-        _animator.SetTrigger("Death");
+        ChangeAnimation(AnimationType.Death.ToString());
     }
 
     public void PlayIdleAnimation()

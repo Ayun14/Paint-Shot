@@ -11,11 +11,15 @@ public abstract class Gun : MonoBehaviour
     protected bool _isPainting = false;
 
     private float _usePaintAmount = 2; // 쏘면 사용되는 페인트 양
+    private float _fillPaintAmount = 2; // 안쏘면 채워지는 페인트 양
     private float _currentPaintAmount = 0;
     private float _paintMax = 100;
 
-    private float _currentTime;
-    private float _paintTime = 0.3f; // 페인트 닳는 시간
+    private float _currentPaintingTime = 0;
+    private float _paintTime = 0.3f; // 페인트 닳는 텀
+
+    private float _currentFillingTime = 0;
+    private float _fillTime = 0.5f; // 페인트 채워지는 텀
 
     protected virtual void Start()
     {
@@ -27,15 +31,24 @@ public abstract class Gun : MonoBehaviour
     {
         if (_isPainting)
         {
-            _currentTime += Time.deltaTime;
-            if (_currentTime >= _paintTime)
+            _currentPaintingTime += Time.deltaTime;
+            if (_currentPaintingTime >= _paintTime)
             {
-                _currentTime = 0;
+                _currentPaintingTime = 0;
                 SetPaintAmount(_usePaintAmount);
             }
 
             if (_currentPaintAmount <= 0)
                 StopPaintParticle();
+        }
+        else
+        {
+            _currentFillingTime += Time.deltaTime;
+            if (_currentFillingTime >= _fillTime)
+            {
+                _currentFillingTime = 0;
+                SetPaintAmount(-_fillPaintAmount);
+            }
         }
     }
 
@@ -53,7 +66,7 @@ public abstract class Gun : MonoBehaviour
         _shootParticle.Stop();
     }
 
-    public void SetPaintAmount(float paintAmount)
+    private void SetPaintAmount(float paintAmount)
     {
         if (_currentPaintAmount <= 0)
         {
@@ -64,5 +77,13 @@ public abstract class Gun : MonoBehaviour
         _currentPaintAmount -= paintAmount;
         float paintValue = _currentPaintAmount / _paintMax;
         OnPaintChange?.Invoke(paintValue);
+
+        if (_currentPaintAmount > _paintMax)
+            _currentPaintAmount = _paintMax;
+    }
+
+    public bool IsCanPaint()
+    {
+        return _currentPaintAmount > 0;
     }
 }

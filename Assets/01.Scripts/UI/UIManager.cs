@@ -19,7 +19,22 @@ public class UIManager : Observer
     [SerializeField] private int _playTime; // 플레이 시간
     private int _restTime; // 남은 시간
 
+    [Header("Respawn")]
+    [SerializeField] private Image _respawnImage;
+    [SerializeField] private float _targetX;
+    [SerializeField] private float _originX;
+    [SerializeField] private TextMeshProUGUI _respawnTimeText;
+    private int _currentRespawnTime; // 남은 시간
+
     private GameController _gameController;
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            OpenRespawnUI();
+        }
+    }
 
     public override void Notify(Subject subject)
     {
@@ -84,7 +99,34 @@ public class UIManager : Observer
 
     private void GameOver()
     {
-        // 플레이어, 적 설정해줘야함
         _gameController.ChangeGameState(GameState.Over);
+    }
+
+    public void OpenRespawnUI()
+    {
+        int spawnDelayTime = 7;
+        _currentRespawnTime = spawnDelayTime - 2;
+        UpdateRespawnText();
+
+        Sequence sequence = DOTween.Sequence();
+        sequence.Append(_respawnImage.rectTransform
+            .DOAnchorPosX(_targetX, 0.7f).SetEase(Ease.InOutSine)
+            .SetUpdate(true));
+        sequence.Append(DOTween.To(() => _currentRespawnTime, 
+            x => _currentRespawnTime = x, 0, spawnDelayTime))
+            .OnUpdate(UpdateRespawnText)
+            .OnComplete(CloseRespawnUI);
+    }
+
+    private void UpdateRespawnText()
+    {
+        _respawnTimeText.text = $"Spawn Time...{_currentRespawnTime}";
+    }
+
+    private void CloseRespawnUI()
+    {
+        _respawnImage.rectTransform
+            .DOAnchorPosX(_originX, 0.4f).SetEase(Ease.InSine)
+            .SetUpdate(true);
     }
 }

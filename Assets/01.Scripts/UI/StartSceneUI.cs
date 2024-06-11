@@ -11,6 +11,8 @@ public class StartSceneUI : MonoBehaviour
     [SerializeField] private Image _colorSelectPanel;
     [SerializeField] private Image _settingPanel;
 
+    [SerializeField] private StartScenePlayer _player;
+
     private bool _colorSelectPanelEnable = false;
     private bool _settingPanelEnable = false;
 
@@ -48,48 +50,56 @@ public class StartSceneUI : MonoBehaviour
     {
         CheckedButtonOff();
         AgentManager.Instance.ChangePlayerColor(AgentColor.Red);
+        _player.ChangePlayerMat(AgentColor.Red);
     }
 
     public void ColorOrangeButtonClick()
     {
         CheckedButtonOff();
         AgentManager.Instance.ChangePlayerColor(AgentColor.Orange);
+        _player.ChangePlayerMat(AgentColor.Orange);
     }
 
     public void ColorYellowButtonClick()
     {
         CheckedButtonOff();
         AgentManager.Instance.ChangePlayerColor(AgentColor.Yellow);
+        _player.ChangePlayerMat(AgentColor.Yellow);
     }
 
     public void ColorGreenButtonClick()
     {
         CheckedButtonOff();
         AgentManager.Instance.ChangePlayerColor(AgentColor.Green);
+        _player.ChangePlayerMat(AgentColor.Green);
     }
 
     public void ColorBlueButtonClick()
     {
         CheckedButtonOff();
         AgentManager.Instance.ChangePlayerColor(AgentColor.Blue);
+        _player.ChangePlayerMat(AgentColor.Blue);
     }
 
     public void ColorMintButtonClick()
     {
         CheckedButtonOff();
         AgentManager.Instance.ChangePlayerColor(AgentColor.Mint);
+        _player.ChangePlayerMat(AgentColor.Mint);
     }
 
     public void ColorPinkButtonClick()
     {
         CheckedButtonOff();
         AgentManager.Instance.ChangePlayerColor(AgentColor.Pink);
+        _player.ChangePlayerMat(AgentColor.Pink);
     }
 
     public void ColorPurpleButtonClick()
     {
         CheckedButtonOff();
         AgentManager.Instance.ChangePlayerColor(AgentColor.Purple);
+        _player.ChangePlayerMat(AgentColor.Purple);
     }
     #endregion
 }

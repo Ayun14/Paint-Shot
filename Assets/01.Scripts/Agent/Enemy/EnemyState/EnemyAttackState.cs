@@ -25,6 +25,9 @@ public class EnemyAttackState : EnemyState<EnemyState>
     {
         base.UpdateState();
 
+        if (_enemyBase.EnemyGun.IsCanPaint())
+            _enemyBase.EnemyGun.PlayPaintParticle();
+
         if (!_enemyBase.IsPlayerDetected())
             _enemyBase.StateMachine.ChangeState(EnemyState.Paint);
 

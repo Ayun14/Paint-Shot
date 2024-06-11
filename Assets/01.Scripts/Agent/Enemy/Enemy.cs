@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour
     #region Components
     [HideInInspector] public AgentAnimation EnemyAnimation { get; private set; }
     [HideInInspector] public EnemyMovement EnemyMovement { get; private set; }
+    [HideInInspector] public Health EnemyHealth { get; private set; }
     public EnemyGun EnemyGun;
     #endregion
 
@@ -34,12 +35,14 @@ public class Enemy : MonoBehaviour
 
     // 리스폰
     [HideInInspector] public Vector3 spawnPos;
-    private float _spawnDelayTime = 3f;
+    [HideInInspector] public float spawnDelayTime = 3f;
+    [HideInInspector] public float currentSpawnDelayTime = 0;
 
     private void Awake()
     {
         EnemyAnimation = transform.Find("Visual").GetComponent<AgentAnimation>();
         EnemyMovement = GetComponent<EnemyMovement>();
+        EnemyHealth = GetComponent<Health>();
         colliderCompo = GetComponent<CapsuleCollider>();
 
         // State 세팅
@@ -101,19 +104,6 @@ public class Enemy : MonoBehaviour
     {
         StateMachine.ChangeState(EnemyState.Death);
         colliderCompo.enabled = false;
-    }
-
-    public void SetRespawn()
-    {
-        StartCoroutine(RespawnRoutine());
-    }
-
-    private IEnumerator RespawnRoutine()
-    {
-        yield return new WaitForSeconds(_spawnDelayTime);
-
-        transform.position = spawnPos;
-        StateMachine.ChangeState(EnemyState.Paint);
     }
 
     public void GameStart()

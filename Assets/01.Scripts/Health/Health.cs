@@ -14,7 +14,7 @@ public class Health : MonoBehaviour, IDamageable
 
     private void Start()
     {
-        _currentHealth = _maxHealth;
+        HealthReset();
     }
 
     private void Update()
@@ -23,6 +23,12 @@ public class Health : MonoBehaviour, IDamageable
         {
             ApplyDamage(5);
         }
+    }
+
+    public void HealthReset()
+    {
+        _currentHealth = _maxHealth;
+        OnHitEvent?.Invoke();
     }
 
     public void ApplyDamage(int damage)

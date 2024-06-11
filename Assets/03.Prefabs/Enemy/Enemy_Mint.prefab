@@ -500,6 +500,9 @@ MonoBehaviour:
   player: {fileID: 0}
   paintCheckTrm: {fileID: 9055978932549827869}
   paintDistance: 1.5
+  spawnPos: {x: 0, y: 0, z: 0}
+  spawnDelayTime: 3
+  currentSpawnDelayTime: 0
 --- !u!114 &6253631955671672298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1015,12 +1018,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5105671577019733827}
     - target: {fileID: 3141719851807860622, guid: b8ce3c9b9edf98343b55f74c8669524b, type: 3}
+      propertyPath: _damage
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3141719851807860622, guid: b8ce3c9b9edf98343b55f74c8669524b, type: 3}
       propertyPath: paintColor.a
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3141719851807860622, guid: b8ce3c9b9edf98343b55f74c8669524b, type: 3}
       propertyPath: paintColor.b
-      value: 0.9839995
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3141719851807860622, guid: b8ce3c9b9edf98343b55f74c8669524b, type: 3}
       propertyPath: paintColor.g
@@ -1028,7 +1035,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3141719851807860622, guid: b8ce3c9b9edf98343b55f74c8669524b, type: 3}
       propertyPath: paintColor.r
-      value: 0.14117646
+      value: 0.14509805
       objectReference: {fileID: 0}
     - target: {fileID: 3141719851807860622, guid: b8ce3c9b9edf98343b55f74c8669524b, type: 3}
       propertyPath: _paintColor.b

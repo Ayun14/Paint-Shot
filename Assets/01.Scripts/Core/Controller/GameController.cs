@@ -1,7 +1,3 @@
-using System.Diagnostics;
-using UnityEngine;
-using Debug = UnityEngine.Debug;
-
 public enum GameState
 {
     Countdown, Playing, Over
