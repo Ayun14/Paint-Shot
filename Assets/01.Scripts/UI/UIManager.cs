@@ -1,8 +1,10 @@
 using DG.Tweening;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Sequence = DG.Tweening.Sequence;
 
 public class UIManager : Observer
 {
@@ -24,17 +26,21 @@ public class UIManager : Observer
     [SerializeField] private float _targetX;
     [SerializeField] private float _originX;
     [SerializeField] private TextMeshProUGUI _respawnTimeText;
-    private int _currentRespawnTime; // 남은 시간
+    private float _currentRespawnTime; // 남은 시간
+
+    [Header("Ranking")]
+    [SerializeField] private Image _rankingPanel;
+    [SerializeField] private Image _firstRankImage; // 1등
+    [SerializeField] private TextMeshProUGUI _firstRankText;
+    [SerializeField] private Image _secondRankImage; // 2등
+    [SerializeField] private TextMeshProUGUI _secondRankText;
+    [SerializeField] private Image _thirdRankImage; // 3등
+    [SerializeField] private TextMeshProUGUI _thirdRankText;
+    [SerializeField] private Image _playerRankImage; // Player
+    [SerializeField] private TextMeshProUGUI _playerRankText;
+    [SerializeField] private List<Material> _colorMatList = new List<Material>();
 
     private GameController _gameController;
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            OpenRespawnUI();
-        }
-    }
 
     public override void Notify(Subject subject)
     {
@@ -46,6 +52,7 @@ public class UIManager : Observer
             _countDownPanel.gameObject.SetActive(_gameController.IsCountdown);
             _playerPanel.gameObject.SetActive(!_gameController.IsOver);
             _ResultPanel.gameObject.SetActive(_gameController.IsOver);
+            _rankingPanel.gameObject.SetActive(!_gameController.IsOver);
 
             if (_gameController.IsCountdown)
                 StartCoroutine(CountdownRoutine());
@@ -59,6 +66,22 @@ public class UIManager : Observer
         // 플레이 시간 초기화
         _restTime = _playTime;
         UpdateRestText();
+
+        // Player Ranking Color Set
+        foreach (Material mat in _colorMatList)
+        {
+            if (mat.name == $"{AgentManager.Instance.AgentColor}ParticleMat")
+            {
+                _playerRankImage.color = mat.color;
+                break;
+            }
+        }
+    }
+
+    private void Update()
+    {
+        if (!_gameController.IsOver)
+            UpdateRanking();
     }
 
     private IEnumerator CountdownRoutine()
@@ -104,15 +127,14 @@ public class UIManager : Observer
 
     public void OpenRespawnUI()
     {
-        int spawnDelayTime = 7;
-        _currentRespawnTime = spawnDelayTime - 2;
+        int spawnDelayTime = 5;
+        _currentRespawnTime = spawnDelayTime;
         UpdateRespawnText();
 
         Sequence sequence = DOTween.Sequence();
         sequence.Append(_respawnImage.rectTransform
-            .DOAnchorPosX(_targetX, 0.7f).SetEase(Ease.InOutSine)
-            .SetUpdate(true));
-        sequence.Append(DOTween.To(() => _currentRespawnTime, 
+            .DOAnchorPosX(_targetX, 0.6f).SetEase(Ease.InOutSine));
+        sequence.Append(DOTween.To(() => _currentRespawnTime,
             x => _currentRespawnTime = x, 0, spawnDelayTime))
             .OnUpdate(UpdateRespawnText)
             .OnComplete(CloseRespawnUI);
@@ -120,13 +142,33 @@ public class UIManager : Observer
 
     private void UpdateRespawnText()
     {
-        _respawnTimeText.text = $"Spawn Time...{_currentRespawnTime}";
+        int currentTime = Mathf.CeilToInt(_currentRespawnTime);
+        _respawnTimeText.text = $"Spawn Time...{currentTime.ToString()}";
     }
 
     private void CloseRespawnUI()
     {
         _respawnImage.rectTransform
-            .DOAnchorPosX(_originX, 0.4f).SetEase(Ease.InSine)
+            .DOAnchorPosX(_originX, 0.6f).SetEase(Ease.InSine)
             .SetUpdate(true);
+    }
+
+    private void UpdateRanking()
+    {
+        // 플레이어 3등 안에 아니면 랭크 따로 띄워주고 UI 들어갔다 나왔따 해야함
+        // 적들 몇 퍼센트 먹고 있는지 알려줘야함 GroundManagerㄱ
+
+        // 색깔 바꿔줘야함
+        // 적은 Enemy_색깔 이걸로 id에서 따오기
+        // GroundManager에 id 들어있는 List있음
+        // _colorMatList돌면서 확인하면 됨 (mat이름 : 색깔ParticleMat)
+        foreach (string s in GroundManager.Instance.idList)
+        {
+        //    if (s == $"Enemy_{메테이얼이르음}")
+        //    {
+        //        _playerRankImage.color = mat.color;
+        //        break;
+        //    }
+        }
     }
 }

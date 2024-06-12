@@ -68,12 +68,6 @@ public abstract class Gun : MonoBehaviour
 
     private void SetPaintAmount(float paintAmount)
     {
-        if (_currentPaintAmount <= 0)
-        {
-            _currentPaintAmount = 0;
-            return;
-        }
-
         _currentPaintAmount -= paintAmount;
         float paintValue = _currentPaintAmount / _paintMax;
         OnPaintChange?.Invoke(paintValue);
@@ -84,6 +78,11 @@ public abstract class Gun : MonoBehaviour
 
     public bool IsCanPaint()
     {
-        return _currentPaintAmount > 0;
+        return _currentPaintAmount > _paintMax / 3;
+    }
+
+    public bool IsNonePaint()
+    {
+        return _currentPaintAmount <= 0;
     }
 }

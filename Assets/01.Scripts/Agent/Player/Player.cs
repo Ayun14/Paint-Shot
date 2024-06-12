@@ -52,11 +52,11 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(delayTime);
 
+        PlayerAnimation.ChangeAnimation(AnimationType.Idle.ToString());
         PlayerInput.SetPlayerInput(true);
         _collider.enabled = true;
         PlayerHealth.HealthReset();
 
-        PlayerAnimation.ChangeAnimation(AnimationType.Idle.ToString());
         transform.position = _spawnPos;
     }
 

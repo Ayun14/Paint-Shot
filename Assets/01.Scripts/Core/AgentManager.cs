@@ -12,11 +12,16 @@ public class AgentManager : Singleton<AgentManager>
     [SerializeField] private List<Material> _colorMatList = new List<Material>();
     [SerializeField] private int _enemySpawnCnt;
 
+    #region Agent
     private AgentColor _agentColor;
     public AgentColor AgentColor => _agentColor;
 
     private Vector3 _agentSpawnPos;
     public Vector3 AgentSpawnPos => _agentSpawnPos;
+
+    private Quaternion _agentRotation;
+    public Quaternion AgentRotation => _agentRotation;
+    #endregion
 
     public void ChangePlayerColor(AgentColor newColor)
     {
@@ -45,15 +50,16 @@ public class AgentManager : Singleton<AgentManager>
             float x = Mathf.Cos(angle) * radius;
             float z = Mathf.Sin(angle) * radius;
 
-            Vector3 spawnPos = new Vector3(x, 0, z);
+            Vector3 spawnPos = new Vector3(x, 0.05500007f, z);
+            Quaternion quaternion = Quaternion.LookRotation(-spawnPos);
 
             if (i == 0) // Player
             {
                 _agentSpawnPos = spawnPos;
+                _agentRotation = quaternion;
                 continue;
             }
 
-            Quaternion quaternion = Quaternion.LookRotation(-spawnPos);
             Transform obj = Instantiate(PickRandomEnemy(), spawnPos,
                 quaternion, transform);
 

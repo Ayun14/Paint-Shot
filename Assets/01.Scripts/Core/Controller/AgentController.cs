@@ -24,6 +24,8 @@ public class AgentController : Observer
         if (_gameController.IsCountdown)
         {
             AgentManager.Instance.AgentSpawn();
+            _player.transform.position = AgentManager.Instance.AgentSpawnPos;
+            _player.transform.rotation = AgentManager.Instance.AgentRotation;
         }
     }
 
