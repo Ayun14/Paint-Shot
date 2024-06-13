@@ -1540,7 +1540,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee20d63893c143b4b858080594b69ea1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  idList: []
   _node:
     serializedVersion: 2
     m_Bits: 128
@@ -2421,18 +2420,22 @@ MonoBehaviour:
   _restTimeText: {fileID: 7862877275697750889}
   _playTime: 120
   _respawnImage: {fileID: 36877766}
-  _targetX: 0
-  _originX: -550
+  _respawnTargetX: 0
+  _respawnOriginX: -550
   _respawnTimeText: {fileID: 968666759}
   _rankingPanel: {fileID: 641589542}
-  _firstRankImage: {fileID: 27017056}
-  _firstRankText: {fileID: 29006886}
-  _secondRankImage: {fileID: 2108083895}
-  _secondRankText: {fileID: 2004411960}
-  _thirdRankImage: {fileID: 1053484250}
-  _thirdRankText: {fileID: 98951437}
+  _rankImageList:
+  - {fileID: 27017056}
+  - {fileID: 2108083895}
+  - {fileID: 1053484250}
+  _rankTextList:
+  - {fileID: 29006886}
+  - {fileID: 2004411960}
+  - {fileID: 98951437}
   _playerRankImage: {fileID: 1337229987}
   _playerRankText: {fileID: 1161696692}
+  _rankTargetX: 100
+  _rankOriginX: 470
   _colorMatList:
   - {fileID: 2100000, guid: ef8c2b84eb1d743499c13ac97f1e70d3, type: 2}
   - {fileID: 2100000, guid: 84d106f504c38e546b7476febe20bd90, type: 2}
@@ -2694,7 +2697,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 100, y: -156}
+  m_AnchoredPosition: {x: 470, y: -156}
   m_SizeDelta: {x: 450, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1337229986

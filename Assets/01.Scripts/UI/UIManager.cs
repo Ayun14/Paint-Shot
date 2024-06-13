@@ -1,9 +1,12 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.EventSystems.EventTrigger;
 using Sequence = DG.Tweening.Sequence;
 
 public class UIManager : Observer
@@ -23,21 +26,22 @@ public class UIManager : Observer
 
     [Header("Respawn")]
     [SerializeField] private Image _respawnImage;
-    [SerializeField] private float _targetX;
-    [SerializeField] private float _originX;
+    [SerializeField] private float _respawnTargetX;
+    [SerializeField] private float _respawnOriginX;
     [SerializeField] private TextMeshProUGUI _respawnTimeText;
-    private float _currentRespawnTime; // 남은 시간
+    private int _spawnDelayTime = 5; // 남은 시간
 
     [Header("Ranking")]
     [SerializeField] private Image _rankingPanel;
-    [SerializeField] private Image _firstRankImage; // 1등
-    [SerializeField] private TextMeshProUGUI _firstRankText;
-    [SerializeField] private Image _secondRankImage; // 2등
-    [SerializeField] private TextMeshProUGUI _secondRankText;
-    [SerializeField] private Image _thirdRankImage; // 3등
-    [SerializeField] private TextMeshProUGUI _thirdRankText;
+    [SerializeField] private List<Image> _rankImageList = new List<Image>();
+    [SerializeField] private List<TextMeshProUGUI> _rankTextList = new List<TextMeshProUGUI>();
+    
     [SerializeField] private Image _playerRankImage; // Player
     [SerializeField] private TextMeshProUGUI _playerRankText;
+    [SerializeField] private float _rankTargetX;
+    [SerializeField] private float _rankOriginX;
+    private Color _playerRankColor;
+
     [SerializeField] private List<Material> _colorMatList = new List<Material>();
 
     private GameController _gameController;
@@ -52,7 +56,7 @@ public class UIManager : Observer
             _countDownPanel.gameObject.SetActive(_gameController.IsCountdown);
             _playerPanel.gameObject.SetActive(!_gameController.IsOver);
             _ResultPanel.gameObject.SetActive(_gameController.IsOver);
-            _rankingPanel.gameObject.SetActive(!_gameController.IsOver);
+            _rankingPanel.gameObject.SetActive(_gameController.IsPlaying);
 
             if (_gameController.IsCountdown)
                 StartCoroutine(CountdownRoutine());
@@ -73,15 +77,16 @@ public class UIManager : Observer
             if (mat.name == $"{AgentManager.Instance.AgentColor}ParticleMat")
             {
                 _playerRankImage.color = mat.color;
+                _playerRankColor = mat.color;
                 break;
             }
         }
     }
 
-    private void Update()
+    private void LateUpdate()
     {
-        if (!_gameController.IsOver)
-            UpdateRanking();
+        //if (_gameController.IsPlaying)
+            //UpdateRanking();
     }
 
     private IEnumerator CountdownRoutine()
@@ -127,48 +132,93 @@ public class UIManager : Observer
 
     public void OpenRespawnUI()
     {
-        int spawnDelayTime = 5;
-        _currentRespawnTime = spawnDelayTime;
-        UpdateRespawnText();
+        _respawnTimeText.text = $"Spawn Time...{_spawnDelayTime}";
 
-        Sequence sequence = DOTween.Sequence();
-        sequence.Append(_respawnImage.rectTransform
-            .DOAnchorPosX(_targetX, 0.6f).SetEase(Ease.InOutSine));
-        sequence.Append(DOTween.To(() => _currentRespawnTime,
-            x => _currentRespawnTime = x, 0, spawnDelayTime))
-            .OnUpdate(UpdateRespawnText)
-            .OnComplete(CloseRespawnUI);
+        _respawnImage.rectTransform
+            .DOAnchorPosX(_respawnTargetX, 0.6f).SetEase(Ease.InOutSine);
+        StartCoroutine(SpawnCountdownRoutine());
     }
 
-    private void UpdateRespawnText()
+    private IEnumerator SpawnCountdownRoutine()
     {
-        int currentTime = Mathf.CeilToInt(_currentRespawnTime);
-        _respawnTimeText.text = $"Spawn Time...{currentTime.ToString()}";
+        for (int i = _spawnDelayTime; i >= 0; --i)
+        {
+            _respawnTimeText.text = $"Spawn Time...{i}";
+
+            if (i == 0)
+                break;
+
+            yield return new WaitForSeconds(1f);
+        }
+
+        CloseRespawnUI();
     }
 
     private void CloseRespawnUI()
     {
         _respawnImage.rectTransform
-            .DOAnchorPosX(_originX, 0.6f).SetEase(Ease.InSine)
-            .SetUpdate(true);
+            .DOAnchorPosX(_respawnOriginX, 0.6f).SetEase(Ease.InSine);
     }
 
     private void UpdateRanking()
     {
-        // 플레이어 3등 안에 아니면 랭크 따로 띄워주고 UI 들어갔다 나왔따 해야함
-        // 적들 몇 퍼센트 먹고 있는지 알려줘야함 GroundManagerㄱ
+        Dictionary<string, float> ranking = GroundManager.Instance.GroundRanking();
+        
+        // 땅 점유율이 많은 순서로 정렬
+        ranking = ranking.OrderByDescending(item => item.Value)
+            .ToDictionary(x => x.Key, x => x.Value);
 
-        // 색깔 바꿔줘야함
-        // 적은 Enemy_색깔 이걸로 id에서 따오기
-        // GroundManager에 id 들어있는 List있음
-        // _colorMatList돌면서 확인하면 됨 (mat이름 : 색깔ParticleMat)
-        foreach (string s in GroundManager.Instance.idList)
+        int rank = 0;
+        int playerRank = 0;
+        foreach (var entry in ranking)
         {
-        //    if (s == $"Enemy_{메테이얼이르음}")
-        //    {
-        //        _playerRankImage.color = mat.color;
-        //        break;
-        //    }
+            if (rank < 3)
+            {
+                foreach (Material mat in _colorMatList)
+                {
+                    if ($"{entry.Key}ParticleMat"
+                        == $"Enemy_{mat.name}")
+                    {
+                        _rankImageList[rank].color = mat.color;
+
+                        string result = entry.Value.ToString("F2");
+                        _rankTextList[rank].text = $"{rank + 1}  -  {result}%";
+                        break;
+                    }
+                }
+            }
+
+            if (entry.Key == "Player")
+                playerRank = rank;
+
+            rank++;
+        }
+
+        // Player
+        if (playerRank < 3)
+        {
+            if (_playerRankImage.rectTransform.position.x != _rankOriginX)
+            {
+                _playerRankImage.rectTransform
+                    .DOAnchorPosX(_rankOriginX, 0.6f)
+                    .SetEase(Ease.InSine); // out
+            }
+
+            _rankImageList[rank].color = _playerRankColor;
+            string result = ranking["Player"].ToString("F2");
+            _rankTextList[rank].text = $"{rank + 1}  -  {result}%";
+        }
+        else
+        {
+            if (_playerRankImage.rectTransform.position.x != _rankTargetX)
+            {
+                _playerRankImage.rectTransform
+                    .DOAnchorPosX(_rankTargetX, 0.6f)
+                    .SetEase(Ease.InOutSine); // in
+            }
+
+            string result = ranking["Player"].ToString("F2");
+            _playerRankText.text = $"{playerRank + 1}  -  {result}%  Player";
         }
     }
 }

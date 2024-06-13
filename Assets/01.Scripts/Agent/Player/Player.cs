@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
 
     private Vector3 _spawnPos; // 스폰, 리스폰되는 장소
 
-    private float _spawnDelayTime = 6f;
+    private float _spawnDelayTime = 5f;
 
     private void Awake()
     {
@@ -45,12 +45,12 @@ public class Player : MonoBehaviour
 
     public void Respawn()
     {
-        StartCoroutine(RespawnRoutine(_spawnDelayTime));
+        StartCoroutine(RespawnRoutine());
     }
 
-    private IEnumerator RespawnRoutine(float delayTime)
+    private IEnumerator RespawnRoutine()
     {
-        yield return new WaitForSeconds(delayTime);
+        yield return new WaitForSeconds(_spawnDelayTime);
 
         PlayerAnimation.ChangeAnimation(AnimationType.Idle.ToString());
         PlayerInput.SetPlayerInput(true);
