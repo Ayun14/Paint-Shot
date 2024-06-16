@@ -16,6 +16,12 @@ public class StartSceneUI : MonoBehaviour
     private bool _colorSelectPanelEnable = false;
     private bool _settingPanelEnable = false;
 
+    private void Start()
+    {
+        // 실행 왜 안디..
+        SendMessage($"Color{AgentManager.Instance.AgentColor}ButtonClick");
+    }
+
     public void PlayButtonClick()
     {
         // 페이드인 처리

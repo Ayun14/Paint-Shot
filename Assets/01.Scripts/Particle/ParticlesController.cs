@@ -32,7 +32,7 @@ public class ParticlesController : MonoBehaviour
     {
         if (_particleSystem == null) return;
 
-        int numCollisionEvents = 
+        int numCollisionEvents =
             _particleSystem.GetCollisionEvents(other, _collisionEventList);
 
         if (other.TryGetComponent(out Paintable p))
@@ -50,7 +50,7 @@ public class ParticlesController : MonoBehaviour
                 GroundManager.Instance.GroundPainted(pos, radius, _owner.name);
             }
         }
-        
+
         if (other.TryGetComponent(out IDamageable health))
             health.ApplyDamage(_damage);
     }

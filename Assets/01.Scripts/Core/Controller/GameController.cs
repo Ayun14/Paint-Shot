@@ -1,3 +1,6 @@
+using System.Diagnostics;
+using UnityEngine;
+
 public enum GameState
 {
     Countdown, Playing, Over
@@ -5,7 +8,7 @@ public enum GameState
 
 public class GameController : Subject
 {
-    private GameState _gameState = GameState.Countdown;
+    private GameState _gameState;
 
     public bool IsCountdown => _gameState == GameState.Countdown;
     public bool IsPlaying => _gameState == GameState.Playing;
@@ -28,6 +31,7 @@ public class GameController : Subject
         if (_agentController)
             Attach(_agentController);
 
+        _gameState = GameState.Countdown;
         NotifyObservers();
     }
 
@@ -37,6 +41,8 @@ public class GameController : Subject
             Detach(_cameraController);
         if (_uiManager)
             Detach(_uiManager);
+        if (_agentController)
+            Detach(_agentController);
     }
 
     public void ChangeGameState(GameState newGameState)

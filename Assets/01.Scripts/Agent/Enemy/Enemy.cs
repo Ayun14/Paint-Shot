@@ -104,12 +104,14 @@ public class Enemy : MonoBehaviour
 
     public void GameStart()
     {
+        StateMachine.isCanChangeState = true;
         StateMachine.ChangeState(EnemyState.Paint);
     }
 
     public void GameOver()
     {
         StateMachine.ChangeState(EnemyState.Idle);
+        StateMachine.isCanChangeState = false;
     }
 
     public void ChangeRandomDirection()

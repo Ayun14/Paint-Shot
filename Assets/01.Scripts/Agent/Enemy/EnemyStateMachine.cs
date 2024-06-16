@@ -8,6 +8,8 @@ public class EnemyStateMachine<T> where T : Enum
 
     public Enemy enemyBase;
 
+    public bool isCanChangeState = true;
+
     public void Initialize(T state, Enemy enemy)
     {
         enemyBase = enemy;
@@ -17,6 +19,8 @@ public class EnemyStateMachine<T> where T : Enum
 
     public void ChangeState(T newState)
     {
+        if (!isCanChangeState) return;
+
         CurrentState.Eixt();
         CurrentState = StateDictionary[newState];
         CurrentState.Enter();

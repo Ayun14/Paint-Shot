@@ -15,6 +15,15 @@ public class GroundManager : Singleton<GroundManager>
         _groundNodeList = new List<GroundNode>();
     }
 
+    public void ResetGroundManager()
+    {
+        foreach (GroundNode node in _groundNodeList)
+        {
+            node.nodeId = "";
+            _rankingDictionary.Clear();
+        }
+    }
+
     public void AddNodeList(GroundNode node)
     {
         _groundNodeList.Add(node);

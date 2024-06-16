@@ -33,7 +33,7 @@ public class AgentController : Observer
     {
         if (_gameController.IsPlaying)
         {
-            AgentManager.Instance.GameStart();
+            AgentManager.Instance.EnemyGameStart();
         }
     }
 
@@ -42,7 +42,7 @@ public class AgentController : Observer
         if (_gameController.IsOver)
         {
             _player.SetGameOver();
-            AgentManager.Instance.GameOver();
+            AgentManager.Instance.EnemyGameOver();
         }
     }
 }

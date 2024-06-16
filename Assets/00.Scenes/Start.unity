@@ -1517,7 +1517,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 428007eee0709e3418a138c2725d4154, type: 2}
   - {fileID: 2100000, guid: 5f3fb33899c6d6a4eab3653b3c3fe258, type: 2}
   - {fileID: 2100000, guid: b419d4a91337ac04b91427b7ac4f829b, type: 2}
-  _enemySpawnCnt: 3
+  _enemySpawnCnt: 4
 --- !u!4 &762905847
 Transform:
   m_ObjectHideFlags: 0

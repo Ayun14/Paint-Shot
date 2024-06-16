@@ -23,9 +23,16 @@ public class AgentManager : Singleton<AgentManager>
     public Quaternion AgentRotation => _agentRotation;
     #endregion
 
+    public void ResetEnemy()
+    {
+        for (int i = 0; i < transform.childCount; ++i)
+            Destroy(transform.GetChild(i).gameObject);
+    }
+
     public void ChangePlayerColor(AgentColor newColor)
     {
         if (newColor == _agentColor) return;
+
         _agentColor = newColor;
     }
 
@@ -96,7 +103,7 @@ public class AgentManager : Singleton<AgentManager>
         return enemy;
     }
 
-    public void GameStart()
+    public void EnemyGameStart()
     {
         for (int i = 0; i < transform.childCount; ++i)
         {
@@ -105,7 +112,7 @@ public class AgentManager : Singleton<AgentManager>
         }
     }
 
-    public void GameOver()
+    public void EnemyGameOver()
     {
         for (int i = 0; i < transform.childCount; ++i)
         {
