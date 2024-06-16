@@ -1,24 +1,33 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class GroundManager : Singleton<GroundManager>
 {
-    private Dictionary<string, float> _rankingDictionary 
-        = new Dictionary<string, float>();
-    private List<GroundNode> _groundNodeList = new List<GroundNode>();
-
     [SerializeField] private LayerMask _node;
+
+    private Dictionary<string, float> _rankingDictionary;
+    private List<GroundNode> _groundNodeList;
+
+    private void Awake()
+    {
+        _rankingDictionary = new Dictionary<string, float>();
+        _groundNodeList = new List<GroundNode>();
+    }
 
     public void AddNodeList(GroundNode node)
     {
         _groundNodeList.Add(node);
     }
 
+    public void AddIdList(string id)
+    {
+        _rankingDictionary.Add(id, 0);
+    }
+
     // 누구 땅인지 설정
     public void GroundPainted(Vector3 pos, float radius, string id)
     {
-        _rankingDictionary.ContainsKey(id);
-
         RaycastHit[] result =
             Physics.SphereCastAll(pos, radius, Vector3.up, 0, _node);
 
@@ -32,11 +41,18 @@ public class GroundManager : Singleton<GroundManager>
     // 땅 차지율을 이름, 차지율로 넘겨줌
     public Dictionary<string, float> GroundRanking()
     {
-        foreach (KeyValuePair<string, float> pair in _rankingDictionary)
+        var keys = _rankingDictionary.Keys.ToList();
+
+        foreach (var key in keys)
         {
-            float persent = GroundResult(pair.Key);
-            _rankingDictionary[pair.Key] = persent;
+            float persent = GroundResult(key);
+            _rankingDictionary[key] = persent;
         }
+
+        // 땅 점유율이 많은 순서로 정렬
+        _rankingDictionary = _rankingDictionary
+            .OrderByDescending(item => item.Value)
+            .ToDictionary(x => x.Key, x => x.Value);
 
         return _rankingDictionary;
     }

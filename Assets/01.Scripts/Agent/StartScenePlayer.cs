@@ -11,7 +11,7 @@ public class StartScenePlayer : MonoBehaviour
     {
         foreach (var mat in _colorMats)
         {
-            if (mat.name == $"{color}ParticleMat")
+            if (mat.name == color.ToString())
             {
                 _skinnedMeshRenderer.material = mat;
                 break;

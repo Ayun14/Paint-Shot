@@ -1,4 +1,4 @@
-using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum EnemyState
@@ -20,6 +20,7 @@ public class Enemy : MonoBehaviour
     public bool isActive;
 
     [SerializeField] private LayerMask _whatIsPlayer;
+    [SerializeField] private LayerMask _whatIsEnemy;
     [SerializeField] private LayerMask _whatIsObstacle;
     [SerializeField] private LayerMask _whatIsNode;
 
@@ -27,7 +28,7 @@ public class Enemy : MonoBehaviour
     public float attackDistance;
     [HideInInspector] public Transform targetTrm;
     [HideInInspector] public CapsuleCollider colliderCompo;
-    [HideInInspector] public Collider player;
+    [HideInInspector] public Collider target;
 
     [Header("Paint Settings")]
     public Transform paintCheckTrm;
@@ -35,7 +36,7 @@ public class Enemy : MonoBehaviour
 
     // 리스폰
     [HideInInspector] public Vector3 spawnPos;
-    [HideInInspector] public float spawnDelayTime = 3f;
+    [HideInInspector] public float spawnDelayTime = 5f;
     [HideInInspector] public float currentSpawnDelayTime = 0;
 
     private void Awake()
@@ -68,28 +69,22 @@ public class Enemy : MonoBehaviour
     }
 
     // 타겟이 공격 범위 안에 들어왔는지
-    public Collider IsPlayerDetected()
+    public Collider IsTargetDetected()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position,
-            attackDistance, _whatIsPlayer);
+        int layerMask = _whatIsPlayer | _whatIsEnemy;
 
-        foreach (Collider collider in colliders)
+        Collider[] colliders = Physics.OverlapSphere
+            (transform.position, attackDistance, layerMask);
+
+        foreach(Collider collider in colliders)
+        {
+            if (collider.name == transform.name)
+                continue;
+
             return collider;
+        }
 
         return null;
-    }
-
-    // 주변에 칠할 땅이 있는지 (이거 안쓸거 같긴함
-    public bool IsCanPaint()
-    {
-        Collider[] colliders = Physics.OverlapSphere(paintCheckTrm.position,
-            paintDistance, _whatIsNode);
-        foreach (Collider collider in colliders)
-        {
-            if (collider.transform.TryGetComponent(out GroundNode node))
-                if (node.nodeId != transform.name) return false;
-        }
-        return true;
     }
 
     // 앞이 장애물이 있는지
@@ -103,6 +98,7 @@ public class Enemy : MonoBehaviour
     public void SetDeath()
     {
         StateMachine.ChangeState(EnemyState.Death);
+        EnemyMovement.StopImmediately();
         colliderCompo.enabled = false;
     }
 

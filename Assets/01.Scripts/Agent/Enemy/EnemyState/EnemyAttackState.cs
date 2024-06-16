@@ -33,12 +33,12 @@ public class EnemyAttackState : EnemyState<EnemyState>
                 _enemyBase.EnemyGun.StopPaintParticle();
         }
 
-        if (!_enemyBase.IsPlayerDetected())
+        if (!_enemyBase.IsTargetDetected())
             _enemyBase.StateMachine.ChangeState(EnemyState.Paint);
 
-        if (_enemyBase.player != null)
+        if (_enemyBase.target != null)
         {
-            if (Vector3.Distance(_enemyBase.player.transform.position, 
+            if (Vector3.Distance(_enemyBase.target.transform.position, 
                 _enemyBase.transform.position) <= _enemyBase.attackDistance)
             {
                 _enemyBase.EnemyMovement.SetMovement(Vector3.zero);
@@ -46,7 +46,7 @@ public class EnemyAttackState : EnemyState<EnemyState>
             else
             {
                 Vector3 dir =
-                    _enemyBase.player.transform.position - _enemyBase.transform.position;
+                    _enemyBase.target.transform.position - _enemyBase.transform.position;
                 _enemyBase.EnemyMovement.SetMovement(dir.normalized);
             }
         }

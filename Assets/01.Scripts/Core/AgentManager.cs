@@ -33,7 +33,7 @@ public class AgentManager : Singleton<AgentManager>
     {
         foreach (var mat in _colorMatList)
         {
-            if (mat.name == $"{_agentColor}ParticleMat")
+            if (mat.name == $"{_agentColor}")
                 return mat;
         }
 

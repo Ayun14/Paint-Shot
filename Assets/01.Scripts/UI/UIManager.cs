@@ -1,13 +1,9 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.EventSystems.EventTrigger;
-using Sequence = DG.Tweening.Sequence;
 
 public class UIManager : Observer
 {
@@ -35,12 +31,13 @@ public class UIManager : Observer
     [SerializeField] private Image _rankingPanel;
     [SerializeField] private List<Image> _rankImageList = new List<Image>();
     [SerializeField] private List<TextMeshProUGUI> _rankTextList = new List<TextMeshProUGUI>();
-    
+
     [SerializeField] private Image _playerRankImage; // Player
     [SerializeField] private TextMeshProUGUI _playerRankText;
     [SerializeField] private float _rankTargetX;
     [SerializeField] private float _rankOriginX;
     private Color _playerRankColor;
+    private bool _isPlayerRankIn = false;
 
     [SerializeField] private List<Material> _colorMatList = new List<Material>();
 
@@ -74,7 +71,7 @@ public class UIManager : Observer
         // Player Ranking Color Set
         foreach (Material mat in _colorMatList)
         {
-            if (mat.name == $"{AgentManager.Instance.AgentColor}ParticleMat")
+            if (mat.name == AgentManager.Instance.AgentColor.ToString())
             {
                 _playerRankImage.color = mat.color;
                 _playerRankColor = mat.color;
@@ -85,8 +82,8 @@ public class UIManager : Observer
 
     private void LateUpdate()
     {
-        //if (_gameController.IsPlaying)
-            //UpdateRanking();
+        if (_gameController.IsPlaying)
+            UpdateRanking();
     }
 
     private IEnumerator CountdownRoutine()
@@ -163,10 +160,6 @@ public class UIManager : Observer
     private void UpdateRanking()
     {
         Dictionary<string, float> ranking = GroundManager.Instance.GroundRanking();
-        
-        // 땅 점유율이 많은 순서로 정렬
-        ranking = ranking.OrderByDescending(item => item.Value)
-            .ToDictionary(x => x.Key, x => x.Value);
 
         int rank = 0;
         int playerRank = 0;
@@ -176,11 +169,10 @@ public class UIManager : Observer
             {
                 foreach (Material mat in _colorMatList)
                 {
-                    if ($"{entry.Key}ParticleMat"
-                        == $"Enemy_{mat.name}")
+                    if ($"{entry.Key}"
+                        == $"Enemy_{mat.name}(Clone)")
                     {
                         _rankImageList[rank].color = mat.color;
-
                         string result = entry.Value.ToString("F2");
                         _rankTextList[rank].text = $"{rank + 1}  -  {result}%";
                         break;
@@ -197,21 +189,24 @@ public class UIManager : Observer
         // Player
         if (playerRank < 3)
         {
-            if (_playerRankImage.rectTransform.position.x != _rankOriginX)
+            if (!_isPlayerRankIn)
             {
+                _isPlayerRankIn = true;
                 _playerRankImage.rectTransform
                     .DOAnchorPosX(_rankOriginX, 0.6f)
                     .SetEase(Ease.InSine); // out
             }
 
-            _rankImageList[rank].color = _playerRankColor;
+            _rankImageList[playerRank].color = _playerRankColor;
             string result = ranking["Player"].ToString("F2");
-            _rankTextList[rank].text = $"{rank + 1}  -  {result}%";
+            _rankTextList[playerRank].text =
+                $"{playerRank + 1}  -  {result}%";
         }
         else
         {
-            if (_playerRankImage.rectTransform.position.x != _rankTargetX)
+            if (_isPlayerRankIn)
             {
+                _isPlayerRankIn = false;
                 _playerRankImage.rectTransform
                     .DOAnchorPosX(_rankTargetX, 0.6f)
                     .SetEase(Ease.InOutSine); // in

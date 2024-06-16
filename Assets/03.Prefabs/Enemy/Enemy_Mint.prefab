@@ -488,6 +488,9 @@ MonoBehaviour:
   _whatIsPlayer:
     serializedVersion: 2
     m_Bits: 64
+  _whatIsEnemy:
+    serializedVersion: 2
+    m_Bits: 512
   _whatIsObstacle:
     serializedVersion: 2
     m_Bits: 256

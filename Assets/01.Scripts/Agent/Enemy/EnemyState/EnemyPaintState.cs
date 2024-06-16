@@ -60,10 +60,8 @@ public class EnemyPaintState : EnemyState<EnemyState>
 
     private void CheckPlayerInAttackRange()
     {
-        _enemyBase.player = _enemyBase.IsPlayerDetected();
-        if (_enemyBase.player)
-        {
+        _enemyBase.target = _enemyBase.IsTargetDetected();
+        if (_enemyBase.target)
             _enemyBase.StateMachine.ChangeState(EnemyState.Attack);
-        }
     }
 }

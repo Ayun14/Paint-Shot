@@ -17,10 +17,15 @@ public class ParticlesController : MonoBehaviour
     private ParticleSystem _particleSystem;
     private List<ParticleCollisionEvent> _collisionEventList;
 
-    void Start()
+    private void Awake()
     {
         _particleSystem = GetComponent<ParticleSystem>();
         _collisionEventList = new List<ParticleCollisionEvent>();
+    }
+
+    void Start()
+    {
+        GroundManager.Instance.AddIdList(_owner.name);
     }
 
     void OnParticleCollision(GameObject other)

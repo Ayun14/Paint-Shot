@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour, IMovement
 {
-    [SerializeField] private float moveSpeed;
+    private float minSpeed = 150;
+    private float maxSpeed = 175;
+    private float moveSpeed;
 
     private Vector3 _velocity = Vector3.zero;
     public Vector3 Velocity => _velocity;
@@ -18,6 +20,11 @@ public class EnemyMovement : MonoBehaviour, IMovement
     {
         _rigid = GetComponent<Rigidbody>();
         _enemyAnimation = transform.Find("Visual").GetComponent<AgentAnimation>();
+    }
+
+    private void Start()
+    {
+        moveSpeed = Random.Range(minSpeed, maxSpeed);
     }
 
     protected void FixedUpdate()
