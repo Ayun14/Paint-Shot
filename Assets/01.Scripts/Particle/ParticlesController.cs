@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class ParticlesController : MonoBehaviour
@@ -8,11 +9,14 @@ public class ParticlesController : MonoBehaviour
     [SerializeField] private float _maxRadius = 0.3f;
     [SerializeField] private float _strength = 1;
     [SerializeField] private float _hardness = 1;
-    [SerializeField] private Transform _owner;
     public Color paintColor;
 
     [Header("Attack Setting")]
     [SerializeField] private int _damage = 1;
+
+    [Header("Id Setting")]
+    [SerializeField] private Transform _owner;
+    private string _name;
 
     private ParticleSystem _particleSystem;
     private List<ParticleCollisionEvent> _collisionEventList;
@@ -25,7 +29,9 @@ public class ParticlesController : MonoBehaviour
 
     void Start()
     {
-        GroundManager.Instance.AddIdList(_owner.name);
+        string color = _owner.name.Substring(6);
+        _name = AgentManager.Instance.GetRandomNickName();
+        GroundManager.Instance.AddIdList(_owner.name, _name, color);
     }
 
     void OnParticleCollision(GameObject other)

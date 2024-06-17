@@ -28,6 +28,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        gameObject.SetActive(true);
         _spawnPos = transform.position;
 
         Material mat = AgentManager.Instance.GetAgentMat();
@@ -71,6 +72,8 @@ public class Player : MonoBehaviour
     public void SetGameOver()
     {
         AgentGun.StopPaintParticle();
+        gameObject.SetActive(false);
+        PlayerAnimation.ChangeAnimation(AnimationType.Idle.ToString());
         SetDeath();
     }
 }

@@ -43,6 +43,7 @@ public class AgentController : Observer
         {
             _player.SetGameOver();
             AgentManager.Instance.EnemyGameOver();
+            AgentManager.Instance.ResetAgentManager();
         }
     }
 }

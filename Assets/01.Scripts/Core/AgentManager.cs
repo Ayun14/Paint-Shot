@@ -1,5 +1,9 @@
+using System.Collections;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public enum AgentColor
 {
@@ -23,10 +27,14 @@ public class AgentManager : Singleton<AgentManager>
     public Quaternion AgentRotation => _agentRotation;
     #endregion
 
-    public void ResetEnemy()
+    private List<int> _nickNameList = new List<int>();
+
+    public void ResetAgentManager()
     {
         for (int i = 0; i < transform.childCount; ++i)
             Destroy(transform.GetChild(i).gameObject);
+
+        _nickNameList.Clear();
     }
 
     public void ChangePlayerColor(AgentColor newColor)
@@ -119,5 +127,30 @@ public class AgentManager : Singleton<AgentManager>
             if (transform.GetChild(i).TryGetComponent(out Enemy enemy))
                 enemy.GameOver();
         }
+    }
+
+    public string GetRandomNickName()
+    {
+        TextAsset textAsset = Resources.Load<TextAsset>("PaintShotAIName");
+
+        if (textAsset == null)
+            return null;
+
+        string[] lines = textAsset.text.Split(new[] { '\r', '\n' }, System.StringSplitOptions.RemoveEmptyEntries);
+        
+        if (lines.Length == 0)
+            return null;
+
+        int randomIndex = Random.Range(0, lines.Length);
+        while (true)
+        {
+            if (!_nickNameList.Contains(randomIndex))
+            {
+                _nickNameList.Add(randomIndex);
+                break;
+            }
+            randomIndex = Random.Range(0, lines.Length);
+        }
+        return lines[randomIndex];
     }
 }

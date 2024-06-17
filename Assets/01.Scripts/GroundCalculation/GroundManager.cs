@@ -1,3 +1,5 @@
+using System.Collections;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -6,12 +8,14 @@ public class GroundManager : Singleton<GroundManager>
 {
     [SerializeField] private LayerMask _node;
 
+    [HideInInspector] public Dictionary<string, string> nameList; // 랭킹에 표시될 이름, 색깔
     private Dictionary<string, float> _rankingDictionary;
     private List<GroundNode> _groundNodeList;
 
     private void Awake()
     {
         _rankingDictionary = new Dictionary<string, float>();
+        nameList = new Dictionary<string, string>();
         _groundNodeList = new List<GroundNode>();
     }
 
@@ -21,6 +25,7 @@ public class GroundManager : Singleton<GroundManager>
         {
             node.nodeId = "";
             _rankingDictionary.Clear();
+            nameList.Clear();
         }
     }
 
@@ -29,9 +34,10 @@ public class GroundManager : Singleton<GroundManager>
         _groundNodeList.Add(node);
     }
 
-    public void AddIdList(string id)
+    public void AddIdList(string id, string name, string color)
     {
         _rankingDictionary.Add(id, 0);
+        nameList.Add(name, color);
     }
 
     // 누구 땅인지 설정

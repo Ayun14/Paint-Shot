@@ -14,18 +14,16 @@ public class UIManager : Observer
 
     [Header("GameOver")]
     [SerializeField] private Image _ResultPanel;
-    [SerializeField]
-    private List<Image> _resultRankImageList
+    [SerializeField] private List<Image> _resultRankImageList
         = new List<Image>();  // 왼쪽에서 순서대로 등장할 이미지
     [SerializeField] private float _resultTargetX;
-    [SerializeField]
-    private List<Image> _characterImageList
+    [SerializeField] private List<Image> _characterImageList
         = new List<Image>();
-    [SerializeField]
-    private List<Sprite> _characterColorSprites
+    [SerializeField] private List<Sprite> _characterColorSprites
         = new List<Sprite>();
-    [SerializeField]
-    private List<TextMeshProUGUI> _persentTextList
+    [SerializeField] private List<TextMeshProUGUI> _persentTextList
+        = new List<TextMeshProUGUI>();
+    [SerializeField] private List<TextMeshProUGUI> _nameTextList
         = new List<TextMeshProUGUI>();
 
     [Header("Playing")]
@@ -44,7 +42,8 @@ public class UIManager : Observer
     [Header("Ranking")]
     [SerializeField] private Image _rankingPanel;
     [SerializeField] private List<Image> _rankImageList = new List<Image>();
-    [SerializeField] private List<TextMeshProUGUI> _rankTextList = new List<TextMeshProUGUI>();
+    [SerializeField] private List<TextMeshProUGUI> _rankPersentTextList = new List<TextMeshProUGUI>();
+    [SerializeField] private List<TextMeshProUGUI> _rankNameTextList = new List<TextMeshProUGUI>();
 
     [SerializeField] private Image _playerRankImage; // Player
     [SerializeField] private TextMeshProUGUI _playerRankText;
@@ -107,11 +106,7 @@ public class UIManager : Observer
     {
         // 페이드인 페이드 아웃
         StopAllCoroutines();
-
-        // 초기화 작업
         GroundManager.Instance.ResetGroundManager();
-        AgentManager.Instance.ResetEnemy();
-
         SceneManager.LoadScene(0);
     }
 
@@ -165,17 +160,26 @@ public class UIManager : Observer
         int index = 0;
         foreach (var ranking in _rankColorDictionary)
         {
-            // 이미지 바꾸기,
+            // 이미지 바꾸기
             foreach (Sprite sprite in _characterColorSprites)
             {
+                // Enemy
                 if (ranking.Key == $"Enemy_{sprite.name}(Clone)")
                     _characterImageList[index].sprite = sprite;
 
+                // Player
                 if (ranking.Key == "Player")
                 {
                     if (AgentManager.Instance.AgentColor.ToString() == sprite.name)
                         _characterImageList[index].sprite = sprite;
+                    _nameTextList[index].text = "Player";
                 }
+            }
+
+            foreach (var name in GroundManager.Instance.nameList)
+            {
+                if ($"Enemy_{name.Value}" == $"{ranking.Key}")
+                    _nameTextList[index].text = name.Key;
             }
 
             // 몇 퍼센트 인지
@@ -189,7 +193,7 @@ public class UIManager : Observer
         {
             image.rectTransform
             .DOAnchorPosX(_resultTargetX, 1f).SetEase(Ease.InOutSine);
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(0.25f);
         }
     }
 
@@ -236,12 +240,18 @@ public class UIManager : Observer
             {
                 foreach (Material mat in _colorMatList)
                 {
-                    if ($"{entry.Key}"
+                    if (entry.Key.ToString()
                         == $"Enemy_{mat.name}(Clone)")
                     {
                         _rankImageList[rank].color = mat.color;
                         string result = entry.Value.ToString("F2");
-                        _rankTextList[rank].text = $"{rank + 1}  -  {result}%";
+                        _rankPersentTextList[rank].text = $"{rank + 1}  -  {result}%";
+
+                        foreach (var name in GroundManager.Instance.nameList)
+                        {
+                            if ($"{name.Value}" == $"{mat.name}(Clone)")
+                                _rankNameTextList[rank].text = name.Key.ToString();
+                        }
                         break;
                     }
                 }
@@ -266,8 +276,9 @@ public class UIManager : Observer
 
             _rankImageList[playerRank].color = _playerRankColor;
             string result = _rankColorDictionary["Player"].ToString("F2");
-            _rankTextList[playerRank].text =
+            _rankPersentTextList[playerRank].text =
                 $"{playerRank + 1}  -  {result}%";
+            _rankNameTextList[playerRank].text = "Player";
         }
         else
         {
