@@ -4,6 +4,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] private SkinnedMeshRenderer _renderer; // ÇÇºÎ»ö
+    [SerializeField] private AudioClip _playerDeadClip;
+
     [HideInInspector] public PlayerInput PlayerInput { get; private set; }
     [HideInInspector] public AgentMovement PlayerMovement { get; private set; }
     [HideInInspector] public PlayerParticleController PlayerParticleController { get; private set; }
@@ -67,13 +69,26 @@ public class Player : MonoBehaviour
         PlayerInput.SetPlayerInput(false);
         PlayerMovement.StopImmediately();
         _collider.enabled = false;
+
+        PlayerAnimation.StopPaintAnimation();
+        PlayerAnimation.StopRunAnimation();
+        PlayerAnimation.PlayIdleAnimation();
+    }
+
+    public void SetResult()
+    {
+        gameObject.SetActive(false);
     }
 
     public void SetGameOver()
     {
         AgentGun.StopPaintParticle();
-        gameObject.SetActive(false);
         PlayerAnimation.ChangeAnimation(AnimationType.Idle.ToString());
         SetDeath();
+    }
+
+    public void DeadSoundPlay()
+    {
+        AudioManager.Instance.Play(_playerDeadClip, false);
     }
 }

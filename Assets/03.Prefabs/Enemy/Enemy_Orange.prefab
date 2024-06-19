@@ -500,7 +500,7 @@ MonoBehaviour:
   attackDistance: 3
   targetTrm: {fileID: 0}
   colliderCompo: {fileID: 0}
-  player: {fileID: 0}
+  target: {fileID: 0}
   paintCheckTrm: {fileID: 9055978932549827869}
   paintDistance: 1.5
   spawnPos: {x: 0, y: 0, z: 0}
@@ -518,7 +518,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acff3ebc70eaecc4095361298d3da61e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 170
 --- !u!114 &3062529343012913759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1213,3 +1212,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _shootTrm: {fileID: 5374254270923358262}
   _shootParticle: {fileID: 8062240181212539302}
+  _shootClip: {fileID: 8300000, guid: 6b5e457cbd21dcd4e8d17192cfe54f8f, type: 3}

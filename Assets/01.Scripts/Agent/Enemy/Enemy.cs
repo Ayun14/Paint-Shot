@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public enum EnemyState
@@ -76,7 +75,7 @@ public class Enemy : MonoBehaviour
         Collider[] colliders = Physics.OverlapSphere
             (transform.position, attackDistance, layerMask);
 
-        foreach(Collider collider in colliders)
+        foreach (Collider collider in colliders)
         {
             if (collider.name == transform.name)
                 continue;

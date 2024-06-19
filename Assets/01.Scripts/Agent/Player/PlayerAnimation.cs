@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class PlayerAnimation : AgentAnimation
 {
     private PlayerInput _playerInput;

@@ -38,7 +38,7 @@ public class EnemyAttackState : EnemyState<EnemyState>
 
         if (_enemyBase.target != null)
         {
-            if (Vector3.Distance(_enemyBase.target.transform.position, 
+            if (Vector3.Distance(_enemyBase.target.transform.position,
                 _enemyBase.transform.position) <= _enemyBase.attackDistance)
             {
                 _enemyBase.EnemyMovement.SetMovement(Vector3.zero);

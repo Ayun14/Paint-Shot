@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,7 +17,7 @@ public class PlayerParticleController : MonoBehaviour
                 continue;
             }
 
-            ParticleSystemRenderer rend = 
+            ParticleSystemRenderer rend =
                 p.GetComponent<ParticleSystemRenderer>();
             rend.material = mat;
             rend.trailMaterial = mat;

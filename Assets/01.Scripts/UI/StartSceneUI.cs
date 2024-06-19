@@ -5,21 +5,33 @@ using UnityEngine.UI;
 
 public class StartSceneUI : MonoBehaviour
 {
-    [SerializeField] private List<ButtonClick> _colorButtonList 
+    [SerializeField]
+    private List<ButtonClick> _colorButtonList
         = new List<ButtonClick>();
-    
     [SerializeField] private Image _colorSelectPanel;
-    [SerializeField] private Image _settingPanel;
-
     [SerializeField] private StartScenePlayer _player;
 
+    [Header("Sound Setting")]
+    [SerializeField] private Sprite[] _soundSprites;
+    [SerializeField] private Image _soundSettingImage;
+
     private bool _colorSelectPanelEnable = false;
-    private bool _settingPanelEnable = false;
+    private bool _soundEnable = true;
 
     private void Start()
     {
-        // 실행 왜 안디..
-        SendMessage($"Color{AgentManager.Instance.AgentColor}ButtonClick");
+        Init();
+    }
+
+    private void Init()
+    {
+        Invoke($"Color{AgentManager.Instance.AgentColor}ButtonClick", 0.01f);
+
+        AudioListener.volume = AudioManager.Instance.GetVolume();
+        if (AudioListener.volume == 1)
+            _soundSettingImage.sprite = _soundSprites[1];
+        else
+            _soundSettingImage.sprite = _soundSprites[0];
     }
 
     public void PlayButtonClick()
@@ -39,10 +51,15 @@ public class StartSceneUI : MonoBehaviour
         _colorSelectPanel.gameObject.SetActive(_colorSelectPanelEnable);
     }
 
-    public void SettingButtonClick()
+    public void SoundSettingButtonClick()
     {
-        _settingPanelEnable = !_settingPanelEnable;
-        _settingPanel.gameObject.SetActive(_settingPanelEnable);
+        _soundEnable = !_soundEnable;
+        if (_soundEnable)
+            _soundSettingImage.sprite = _soundSprites[1];
+        else
+            _soundSettingImage.sprite = _soundSprites[0];
+
+        AudioManager.Instance.VolumeChange();
     }
 
     #region Color 버튼 관련

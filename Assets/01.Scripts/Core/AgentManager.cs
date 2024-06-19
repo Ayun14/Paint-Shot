@@ -1,7 +1,4 @@
-using System.Collections;
-using System;
 using System.Collections.Generic;
-using System.Drawing;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -61,7 +58,7 @@ public class AgentManager : Singleton<AgentManager>
         {
             float angle = ((Mathf.PI * 2) / (_enemySpawnCnt + 1)) * i;
 
-            float radius = 12f;
+            float radius = 18f;
             float x = Mathf.Cos(angle) * radius;
             float z = Mathf.Sin(angle) * radius;
 
@@ -137,7 +134,7 @@ public class AgentManager : Singleton<AgentManager>
             return null;
 
         string[] lines = textAsset.text.Split(new[] { '\r', '\n' }, System.StringSplitOptions.RemoveEmptyEntries);
-        
+
         if (lines.Length == 0)
             return null;
 

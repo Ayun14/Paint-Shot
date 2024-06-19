@@ -11,19 +11,28 @@ public class UIManager : Observer
     [Header("Countdown")]
     [SerializeField] private Image _countDownPanel;
     [SerializeField] private TextMeshProUGUI _countdownText;
+    [SerializeField] private AudioClip _gameStartClip;
 
     [Header("GameOver")]
+    [SerializeField] private AudioClip _timerClip;
+    private AudioObject _timerObject;
+
     [SerializeField] private Image _ResultPanel;
-    [SerializeField] private List<Image> _resultRankImageList
+    [SerializeField]
+    private List<Image> _resultRankImageList
         = new List<Image>();  // 왼쪽에서 순서대로 등장할 이미지
     [SerializeField] private float _resultTargetX;
-    [SerializeField] private List<Image> _characterImageList
+    [SerializeField]
+    private List<Image> _characterImageList
         = new List<Image>();
-    [SerializeField] private List<Sprite> _characterColorSprites
+    [SerializeField]
+    private List<Sprite> _characterColorSprites
         = new List<Sprite>();
-    [SerializeField] private List<TextMeshProUGUI> _persentTextList
+    [SerializeField]
+    private List<TextMeshProUGUI> _persentTextList
         = new List<TextMeshProUGUI>();
-    [SerializeField] private List<TextMeshProUGUI> _nameTextList
+    [SerializeField]
+    private List<TextMeshProUGUI> _nameTextList
         = new List<TextMeshProUGUI>();
 
     [Header("Playing")]
@@ -40,6 +49,8 @@ public class UIManager : Observer
     private int _spawnDelayTime = 5; // 남은 시간
 
     [Header("Ranking")]
+    [SerializeField] private AudioClip _uiOpenClip;
+
     [SerializeField] private Image _rankingPanel;
     [SerializeField] private List<Image> _rankImageList = new List<Image>();
     [SerializeField] private List<TextMeshProUGUI> _rankPersentTextList = new List<TextMeshProUGUI>();
@@ -65,9 +76,13 @@ public class UIManager : Observer
         if (_gameController != null)
         {
             _countDownPanel.gameObject.SetActive(_gameController.IsCountdown);
-            _playerPanel.gameObject.SetActive(!_gameController.IsOver);
-            _ResultPanel.gameObject.SetActive(_gameController.IsOver);
+            _ResultPanel.gameObject.SetActive(_gameController.IsResult);
             _rankingPanel.gameObject.SetActive(_gameController.IsPlaying);
+            if (_gameController.IsCountdown || _gameController.IsPlaying)
+                _playerPanel.gameObject.SetActive(true);
+            else
+                _playerPanel.gameObject.SetActive(false);
+
 
             if (_gameController.IsCountdown)
                 StartCoroutine(CountdownRoutine());
@@ -121,6 +136,7 @@ public class UIManager : Observer
         }
 
         _gameController.ChangeGameState(GameState.Playing);
+        AudioManager.Instance.Play(_gameStartClip, false);
     }
 
     private void SetRestTime() // 남은 시간
@@ -140,7 +156,8 @@ public class UIManager : Observer
         if (_restTime <= 10)
         {
             _restTimeText.color = Color.red;
-            // 소리 내거나 브금 빠르게
+            if (_timerObject == null)
+                _timerObject = AudioManager.Instance.Play(_timerClip, true);
         }
         else
             _restTimeText.color = Color.white;
@@ -148,13 +165,20 @@ public class UIManager : Observer
 
     private void GameOver()
     {
-        _gameController.ChangeGameState(GameState.Over);
-
-        StartCoroutine(ShowResultRoutine());
+        Destroy(_timerObject.gameObject);
+        StartCoroutine(GameOverRoutine());
     }
 
-    private IEnumerator ShowResultRoutine()
+    private IEnumerator GameOverRoutine()
     {
+        _gameController.ChangeGameState(GameState.Over);
+        yield return new WaitForSeconds(3f);
+        StartCoroutine(ResultRoutine());
+    }
+
+    private IEnumerator ResultRoutine()
+    {
+        _gameController.ChangeGameState(GameState.Result);
         yield return new WaitForSeconds(3.5f);
 
         int index = 0;
@@ -193,8 +217,10 @@ public class UIManager : Observer
         {
             image.rectTransform
             .DOAnchorPosX(_resultTargetX, 1f).SetEase(Ease.InOutSine);
+            AudioManager.Instance.Play(_uiOpenClip, false);
             yield return new WaitForSeconds(0.25f);
         }
+        AudioManager.Instance.Play(_uiOpenClip, false);
     }
 
     public void OpenRespawnUI()

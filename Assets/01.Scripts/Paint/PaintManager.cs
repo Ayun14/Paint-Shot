@@ -21,7 +21,7 @@ public class PaintManager : Singleton<PaintManager>
 
     private Material paintMaterial;
     private Material extendMaterial;
-    
+
     private CommandBuffer command;
 
     private void Awake()
@@ -57,7 +57,6 @@ public class PaintManager : Singleton<PaintManager>
         Graphics.ExecuteCommandBuffer(command);
         command.Clear();
     }
-
 
     public void paint(Paintable paintable, Vector3 pos, float radius = 1f, float hardness = .5f, float strength = .5f, Color? color = null)
     {

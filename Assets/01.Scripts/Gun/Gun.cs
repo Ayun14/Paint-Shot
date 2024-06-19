@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public abstract class Gun : MonoBehaviour
 {
@@ -8,6 +7,9 @@ public abstract class Gun : MonoBehaviour
 
     [SerializeField] protected Transform _shootTrm;
     [SerializeField] protected ParticleSystem _shootParticle;
+    [SerializeField] protected AudioClip _shootClip;
+    [SerializeField] protected bool _isSoundOn = false;
+    protected AudioObject _shootAudioObject;
 
     protected bool _isPainting = false;
 
@@ -37,6 +39,9 @@ public abstract class Gun : MonoBehaviour
             {
                 _currentPaintingTime = 0;
                 SetPaintAmount(_usePaintAmount);
+
+                if (_isSoundOn)
+                    AudioManager.Instance.Play(_shootClip, false);
             }
 
             if (_currentPaintAmount <= 0)
