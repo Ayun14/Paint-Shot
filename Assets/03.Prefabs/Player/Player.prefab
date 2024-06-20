@@ -231,6 +231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _renderer: {fileID: 2972807262637712012}
+  _playerDeadClip: {fileID: 0}
   AgentGun: {fileID: 5843691508139684178}
 --- !u!114 &4296919866408706504
 MonoBehaviour:
@@ -1325,6 +1326,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _shootTrm: {fileID: 6960828073335049276}
   _shootParticle: {fileID: 3778932503347300899}
+  _shootClip: {fileID: 0}
+  _isSoundOn: 0
   _playerInput: {fileID: 4296919866408706504}
 --- !u!4 &7935116661943418579 stripped
 Transform:

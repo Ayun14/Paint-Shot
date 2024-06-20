@@ -4876,7 +4876,7 @@ ParticleSystemRenderer:
   m_AllowRoll: 1
   m_FreeformStretching: 0
   m_RotateWithStretchDirection: 1
-  m_VertexStreams: 000102030409
+  m_VertexStreams: 000304
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
@@ -9817,7 +9817,7 @@ ParticleSystemRenderer:
   m_AllowRoll: 1
   m_FreeformStretching: 0
   m_RotateWithStretchDirection: 1
-  m_VertexStreams: 0001020304
+  m_VertexStreams: 000304
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
@@ -14726,9 +14726,8 @@ MonoBehaviour:
   _maxRadius: 1.5
   _strength: 1
   _hardness: 0.01
-  _paintColor: {r: 0.7686275, g: 0.08235294, b: 0.13725491, a: 1}
+  paintColor: {r: 0, g: 0, b: 0, a: 0}
   _owner: {fileID: 0}
-  _damage: 5
 --- !u!1 &6208109909338601474
 GameObject:
   m_ObjectHideFlags: 0
@@ -19663,7 +19662,7 @@ ParticleSystemRenderer:
   m_AllowRoll: 1
   m_FreeformStretching: 0
   m_RotateWithStretchDirection: 1
-  m_VertexStreams: 0001020304
+  m_VertexStreams: 000304
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
@@ -24587,7 +24586,7 @@ ParticleSystemRenderer:
   m_AllowRoll: 1
   m_FreeformStretching: 0
   m_RotateWithStretchDirection: 1
-  m_VertexStreams: 0001020304
+  m_VertexStreams: 000304
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}

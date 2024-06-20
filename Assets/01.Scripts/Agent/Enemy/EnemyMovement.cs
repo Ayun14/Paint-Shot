@@ -60,6 +60,12 @@ public class EnemyMovement : MonoBehaviour, IMovement
         }
     }
 
+    public void SetLookRotation(Vector3 direction)
+    {
+        if (direction.sqrMagnitude > 0)
+            _targetRotation = Quaternion.LookRotation(direction);
+    }
+
     public void StopImmediately()
     {
         _velocity = Vector3.zero;

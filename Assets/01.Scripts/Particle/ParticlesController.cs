@@ -10,13 +10,11 @@ public class ParticlesController : MonoBehaviour
     [SerializeField] private float _hardness = 1;
     public Color paintColor;
 
-    [Header("Attack Setting")]
-    [SerializeField] private int _damage = 1;
-
     [Header("Id Setting")]
     [SerializeField] private Transform _owner;
     private string _name;
 
+    private int _damage = 4;
     private ParticleSystem _particleSystem;
     private List<ParticleCollisionEvent> _collisionEventList;
 
@@ -56,7 +54,10 @@ public class ParticlesController : MonoBehaviour
             }
         }
 
-        if (other.TryGetComponent(out IDamageable health))
+        if (other.name != _owner.name &&
+            other.TryGetComponent(out IDamageable health))
+        {
             health.ApplyDamage(_damage);
+        }
     }
 }

@@ -955,6 +955,18 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: 5f3fb33899c6d6a4eab3653b3c3fe258, type: 2}
+    - target: {fileID: 485655845842265729, guid: b8ce3c9b9edf98343b55f74c8669524b, type: 3}
+      propertyPath: m_VertexStreams.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 485655845842265729, guid: b8ce3c9b9edf98343b55f74c8669524b, type: 3}
+      propertyPath: m_VertexStreams.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 485655845842265729, guid: b8ce3c9b9edf98343b55f74c8669524b, type: 3}
+      propertyPath: m_VertexStreams.Array.data[2]
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1579671509628991886, guid: b8ce3c9b9edf98343b55f74c8669524b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -963,6 +975,18 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: 5f3fb33899c6d6a4eab3653b3c3fe258, type: 2}
+    - target: {fileID: 1579671509628991886, guid: b8ce3c9b9edf98343b55f74c8669524b, type: 3}
+      propertyPath: m_VertexStreams.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1579671509628991886, guid: b8ce3c9b9edf98343b55f74c8669524b, type: 3}
+      propertyPath: m_VertexStreams.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1579671509628991886, guid: b8ce3c9b9edf98343b55f74c8669524b, type: 3}
+      propertyPath: m_VertexStreams.Array.data[2]
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 2872142767925077627, guid: b8ce3c9b9edf98343b55f74c8669524b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -971,6 +995,18 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: 5f3fb33899c6d6a4eab3653b3c3fe258, type: 2}
+    - target: {fileID: 2872142767925077627, guid: b8ce3c9b9edf98343b55f74c8669524b, type: 3}
+      propertyPath: m_VertexStreams.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2872142767925077627, guid: b8ce3c9b9edf98343b55f74c8669524b, type: 3}
+      propertyPath: m_VertexStreams.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2872142767925077627, guid: b8ce3c9b9edf98343b55f74c8669524b, type: 3}
+      propertyPath: m_VertexStreams.Array.data[2]
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 3101575964637757509, guid: b8ce3c9b9edf98343b55f74c8669524b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.0008
@@ -1015,6 +1051,18 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 5f3fb33899c6d6a4eab3653b3c3fe258, type: 2}
+    - target: {fileID: 3126386714036980780, guid: b8ce3c9b9edf98343b55f74c8669524b, type: 3}
+      propertyPath: m_VertexStreams.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3126386714036980780, guid: b8ce3c9b9edf98343b55f74c8669524b, type: 3}
+      propertyPath: m_VertexStreams.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3126386714036980780, guid: b8ce3c9b9edf98343b55f74c8669524b, type: 3}
+      propertyPath: m_VertexStreams.Array.data[2]
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 3141719851807860622, guid: b8ce3c9b9edf98343b55f74c8669524b, type: 3}
       propertyPath: _owner
       value: 

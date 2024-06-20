@@ -16,15 +16,11 @@ public class EnemyState<T> where T : Enum
         _animBoolHash = Animator.StringToHash(animBoolHash);
     }
 
-    public virtual void UpdateState()
-    {
-
-    }
+    public virtual void UpdateState() { }
 
     public virtual void Enter()
     {
         _endTriggerCalled = false;
-        // 局聪皋捞记 难林扁
     }
 
     public virtual void Eixt()
