@@ -6,7 +6,7 @@ public class Health : MonoBehaviour, IDamageable
     public UnityEvent OnHitEvent;
     public UnityEvent OnDeadEvent;
 
-    private int _maxHealth = 100;
+    [SerializeField] private int _maxHealth = 100;
     public int MaxHealth => _maxHealth;
     private int _currentHealth;
     public int CurrentHealth => _currentHealth;
