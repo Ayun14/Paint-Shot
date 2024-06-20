@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9055978932549827869}
   m_Layer: 9
-  m_Name: PaintCheckPos
+  m_Name: ObstacleCheckPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -501,8 +501,8 @@ MonoBehaviour:
   targetTrm: {fileID: 0}
   colliderCompo: {fileID: 0}
   target: {fileID: 0}
-  paintCheckTrm: {fileID: 9055978932549827869}
-  paintDistance: 1.5
+  obstacleCheckTrm: {fileID: 9055978932549827869}
+  obstacleDistance: 1
   spawnPos: {x: 0, y: 0, z: 0}
   spawnDelayTime: 3
   currentSpawnDelayTime: 0
@@ -1213,3 +1213,4 @@ MonoBehaviour:
   _shootTrm: {fileID: 5374254270923358262}
   _shootParticle: {fileID: 8062240181212539302}
   _shootClip: {fileID: 8300000, guid: 6b5e457cbd21dcd4e8d17192cfe54f8f, type: 3}
+  _isSoundOn: 0

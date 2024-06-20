@@ -29,9 +29,15 @@ public class StartSceneUI : MonoBehaviour
 
         AudioListener.volume = AudioManager.Instance.GetVolume();
         if (AudioListener.volume == 1)
+        {
             _soundSettingImage.sprite = _soundSprites[1];
+            _soundEnable = true;
+        }
         else
+        {
             _soundSettingImage.sprite = _soundSprites[0];
+            _soundEnable = false;
+        }
     }
 
     public void PlayButtonClick()

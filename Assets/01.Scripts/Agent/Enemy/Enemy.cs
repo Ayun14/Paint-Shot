@@ -29,9 +29,9 @@ public class Enemy : MonoBehaviour
     [HideInInspector] public CapsuleCollider colliderCompo;
     [HideInInspector] public Collider target;
 
-    [Header("Paint Settings")]
-    public Transform paintCheckTrm;
-    public float paintDistance; // 이만큼 영역이 다 칠해져 있는지
+    [Header("Obstacle Settings")]
+    public Transform obstacleCheckTrm;
+    public float obstacleDistance;
 
     // 리스폰
     [HideInInspector] public Vector3 spawnPos;
@@ -89,8 +89,8 @@ public class Enemy : MonoBehaviour
     // 앞이 장애물이 있는지
     public bool IsObstacleInFront()
     {
-        Collider[] colliders = Physics.OverlapSphere(paintCheckTrm.position,
-            paintDistance, _whatIsObstacle);
+        Collider[] colliders = Physics.OverlapSphere(obstacleCheckTrm.position,
+            obstacleDistance, _whatIsObstacle);
         return colliders.Length > 0;
     }
 
@@ -121,8 +121,6 @@ public class Enemy : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(paintCheckTrm.position, paintDistance);
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackDistance);
         Gizmos.color = Color.white;

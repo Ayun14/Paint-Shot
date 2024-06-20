@@ -58,7 +58,7 @@ public class AgentManager : Singleton<AgentManager>
         {
             float angle = ((Mathf.PI * 2) / (_enemySpawnCnt + 1)) * i;
 
-            float radius = 18f;
+            float radius = 13f;
             float x = Mathf.Cos(angle) * radius;
             float z = Mathf.Sin(angle) * radius;
 

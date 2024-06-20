@@ -9,11 +9,18 @@ public class AudioManager : Singleton<AudioManager>
 
     private void Awake()
     {
-        Application.targetFrameRate = 60;
+        Init();
     }
 
-    private void Start()
+    private void Init()
     {
+        Application.targetFrameRate = 60;
+
+        if (PlayerPrefs.GetInt("Volume") == 0)
+            isMuted = true;
+        else
+            isMuted = false;
+
         VolumeSetting();
     }
 
@@ -39,16 +46,19 @@ public class AudioManager : Singleton<AudioManager>
     private void VolumeSetting()
     {
         if (isMuted)
+        {
             AudioListener.volume = 0;
+            PlayerPrefs.SetInt("Volume", 0);
+        }
         else
+        {
             AudioListener.volume = 1;
+            PlayerPrefs.SetInt("Volume", 1);
+        }
     }
 
     public int GetVolume()
     {
-        if (isMuted)
-            return 0;
-
-        return 1;
+        return PlayerPrefs.GetInt("Volume");
     }
 }

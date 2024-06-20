@@ -43,6 +43,8 @@ public class EnemyPaintState : EnemyState<EnemyState>
             else
                 _enemyBase.EnemyGun.StopPaintParticle();
         }
+        else
+            _enemyBase.EnemyGun.PlayPaintParticle();
     }
 
     private void ChangeDirection()
