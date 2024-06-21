@@ -10,7 +10,6 @@ public class EnemyIdleState : EnemyState<EnemyState>
     {
         base.Enter();
         _enemyBase.EnemyAnimation.PlayIdleAnimation();
-        _enemyBase.EnemyGun.StopPaintParticle();
         _enemyBase.EnemyMovement.SetMovement(Vector3.zero);
     }
 

@@ -110,6 +110,7 @@ public class Enemy : MonoBehaviour
     public void GameOver()
     {
         StateMachine.ChangeState(EnemyState.Idle);
+        EnemyGun.isAgentActive = true;
         StateMachine.isCanChangeState = false;
     }
 

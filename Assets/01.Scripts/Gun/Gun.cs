@@ -12,17 +12,19 @@ public abstract class Gun : MonoBehaviour
     protected AudioObject _shootAudioObject;
 
     protected bool _isPainting = false;
+    public bool isAgentActive = true;
 
     protected float _usePaintAmount = 2; // 쏘면 사용되는 페인트 양
-    protected float _fillPaintAmount = 2; // 안쏘면 채워지는 페인트 양
+    protected float _fillPaintAmount = 3; // 안쏘면 채워지는 페인트 양
     protected float _currentPaintAmount = 0;
-    protected float _paintMax = 100;
+    protected float _paintMax = 80;
+    protected float _fillPersent = 0.3f;
 
     protected float _currentPaintingTime = 0;
     protected float _paintTime = 0.3f; // 페인트 닳는 텀
 
     protected float _currentFillingTime = 0;
-    protected float _fillTime = 0.5f; // 페인트 채워지는 텀
+    protected float _fillTime = 0.3f; // 페인트 채워지는 텀
 
     protected virtual void Start()
     {
@@ -49,6 +51,8 @@ public abstract class Gun : MonoBehaviour
         }
         else
         {
+            if (!isAgentActive) return;
+
             _currentFillingTime += Time.deltaTime;
             if (_currentFillingTime >= _fillTime)
             {
@@ -77,6 +81,14 @@ public abstract class Gun : MonoBehaviour
         _currentPaintAmount -= paintAmount;
         float paintValue = _currentPaintAmount / _paintMax;
         OnPaintChange?.Invoke(paintValue);
+
+        if (_currentPaintAmount > _paintMax)
+            _currentPaintAmount = _paintMax;
+    }
+
+    public void OnDeadPaintFill()
+    {
+        _currentPaintAmount += _currentPaintAmount * _fillPersent;
 
         if (_currentPaintAmount > _paintMax)
             _currentPaintAmount = _paintMax;

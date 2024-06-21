@@ -177,7 +177,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
-    FieldOfView: 96
+    FieldOfView: 70
     OrthographicSize: 5
     NearClipPlane: 0.3
     FarClipPlane: 30
@@ -2218,7 +2218,7 @@ Transform:
   m_GameObject: {fileID: 447736012}
   serializedVersion: 2
   m_LocalRotation: {x: 0.46174863, y: -0, z: -0, w: 0.8870109}
-  m_LocalPosition: {x: 4.96, y: 8.746521, z: -13.6957655}
+  m_LocalPosition: {x: 0, y: 8.691522, z: -5.7357645}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3536,7 +3536,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: 0.46174863, y: -0, z: -0, w: 0.8870109}
-  m_LocalPosition: {x: 4.96, y: 8.746521, z: -13.6957655}
+  m_LocalPosition: {x: 0, y: 8.691522, z: -5.7357645}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4220,6 +4220,8 @@ MonoBehaviour:
   _gameStartClip: {fileID: 8300000, guid: 34e094a89b923e743bc2c855d3596420, type: 3}
   _timerClip: {fileID: 8300000, guid: c5e2a73ad4706440f93bf05df0b465fe, type: 3}
   _ResultPanel: {fileID: 983937951}
+  _homeButton: {fileID: 1692939024}
+  _homeButtonTargetX: -40
   _resultRankImageList:
   - {fileID: 2113996692}
   - {fileID: 1791071038}
@@ -4256,7 +4258,7 @@ MonoBehaviour:
   - {fileID: 1185072687}
   _playerPanel: {fileID: 2002293344}
   _restTimeText: {fileID: 7862877275697750889}
-  _playTime: 60
+  _playTime: 1
   _respawnImage: {fileID: 36877766}
   _respawnTargetX: 0
   _respawnOriginX: -550
@@ -6713,7 +6715,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -40, y: 40}
+  m_AnchoredPosition: {x: 340, y: 40}
   m_SizeDelta: {x: 220, y: 100}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1692939023
@@ -8507,6 +8509,14 @@ PrefabInstance:
       propertyPath: _playerDeadClip
       value: 
       objectReference: {fileID: 8300000, guid: a0010a1a0c474473b81729eb770c485f, type: 3}
+    - target: {fileID: 3778932503347300899, guid: e2ab5238b17d8cf45a46ba46def1508c, type: 3}
+      propertyPath: CollisionModule.collisionMessages
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3778932503347300899, guid: e2ab5238b17d8cf45a46ba46def1508c, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 4296919866408706504, guid: e2ab5238b17d8cf45a46ba46def1508c, type: 3}
       propertyPath: _joystick
       value: 
@@ -8541,15 +8551,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7226071497479322132, guid: e2ab5238b17d8cf45a46ba46def1508c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.96
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7226071497479322132, guid: e2ab5238b17d8cf45a46ba46def1508c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.055000067
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7226071497479322132, guid: e2ab5238b17d8cf45a46ba46def1508c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -7.96
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7226071497479322132, guid: e2ab5238b17d8cf45a46ba46def1508c, type: 3}
       propertyPath: m_LocalRotation.w

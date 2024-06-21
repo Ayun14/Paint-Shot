@@ -10,7 +10,7 @@ public class EnemyDeathState : EnemyState<EnemyState>
     {
         base.Enter();
 
-        _enemyBase.EnemyGun.StopPaintParticle();
+        _enemyBase.EnemyGun.isAgentActive = false;
     }
 
     public override void UpdateState()
@@ -21,11 +21,18 @@ public class EnemyDeathState : EnemyState<EnemyState>
         if (_enemyBase.currentSpawnDelayTime > _enemyBase.spawnDelayTime)
         {
             _enemyBase.currentSpawnDelayTime = 0;
-            _enemyBase.transform.position = _enemyBase.spawnPos;
+            _enemyBase.gameObject.SetActive(false);
+
+            _enemyBase.EnemyGun.isAgentActive = true;
             _enemyBase.colliderCompo.enabled = true;
             _enemyBase.EnemyMovement.StopImmediately();
             _enemyBase.EnemyHealth.HealthReset();
+            _enemyBase.EnemyGun.OnDeadPaintFill();
+
             _enemyBase.StateMachine.ChangeState(EnemyState.Paint);
+            _enemyBase.transform.position = _enemyBase.spawnPos;
+
+            _enemyBase.gameObject.SetActive(true);
         }
     }
 }

@@ -18,10 +18,14 @@ public class UIManager : Observer
     private AudioObject _timerObject;
 
     [SerializeField] private Image _ResultPanel;
+    [SerializeField] private Image _homeButton;
+    [SerializeField] private float _homeButtonTargetX;
+
     [SerializeField]
     private List<Image> _resultRankImageList
         = new List<Image>();  // 왼쪽에서 순서대로 등장할 이미지
     [SerializeField] private float _resultTargetX;
+
     [SerializeField]
     private List<Image> _characterImageList
         = new List<Image>();
@@ -46,9 +50,8 @@ public class UIManager : Observer
     [SerializeField] private float _respawnTargetX;
     [SerializeField] private float _respawnOriginX;
     [SerializeField] private TextMeshProUGUI _respawnTimeText;
-    private int _spawnDelayTime = 5; // 남은 시간
+    private int _spawnDelayTime = 3; // 스폰 시간
 
-    [Header("Ranking")]
     [SerializeField] private AudioClip _uiOpenClip;
 
     [SerializeField] private Image _rankingPanel;
@@ -122,6 +125,7 @@ public class UIManager : Observer
         // 페이드인 페이드 아웃
         StopAllCoroutines();
         GroundManager.Instance.ResetGroundManager();
+
         SceneManager.LoadScene(0);
     }
 
@@ -221,6 +225,10 @@ public class UIManager : Observer
             yield return new WaitForSeconds(0.25f);
         }
         AudioManager.Instance.Play(_uiOpenClip, false);
+
+        yield return new WaitForSeconds(0.5f);
+        _homeButton.rectTransform
+            .DOAnchorPosX(_homeButtonTargetX, 1f).SetEase(Ease.InOutSine);
     }
 
     public void OpenRespawnUI()

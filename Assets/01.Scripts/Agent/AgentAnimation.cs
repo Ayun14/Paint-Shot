@@ -17,8 +17,6 @@ public class AgentAnimation : MonoBehaviour
 
     public void ChangeAnimation(string animHash)
     {
-        if (_currentAnimHash == animHash) return;
-
         _animator.SetBool(_currentAnimHash, false);
         _currentAnimHash = animHash;
         _animator.SetBool(_currentAnimHash, true);
@@ -26,9 +24,7 @@ public class AgentAnimation : MonoBehaviour
 
     public void DeathAnimation()
     {
-        StopIdleAnimation();
-        StopRunAnimation();
-        StopPaintAnimation();
+        StopAllLayerAnimation();
         ChangeAnimation(AnimationType.Death.ToString());
     }
 
@@ -60,5 +56,12 @@ public class AgentAnimation : MonoBehaviour
     public void StopPaintAnimation()
     {
         _animator.SetLayerWeight(3, 0);
+    }
+
+    public void StopAllLayerAnimation()
+    {
+        StopIdleAnimation();
+        StopRunAnimation();
+        StopPaintAnimation();
     }
 }

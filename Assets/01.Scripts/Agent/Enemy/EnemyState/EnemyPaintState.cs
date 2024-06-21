@@ -14,6 +14,7 @@ public class EnemyPaintState : EnemyState<EnemyState>
     public override void Enter()
     {
         base.Enter();
+
         _enemyBase.EnemyAnimation.PlayPaintAnimation();
         _enemyBase.EnemyGun.PlayPaintParticle();
 

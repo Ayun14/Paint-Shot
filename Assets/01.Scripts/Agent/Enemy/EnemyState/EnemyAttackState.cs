@@ -4,8 +4,8 @@ public class EnemyAttackState : EnemyState<EnemyState>
 {
     // stop attack
     private float _currentAttackTime;
-    private float _stopAttackMinTime = 1f;
-    private float _stopAttackMaxTime = 1.7f;
+    private float _stopAttackMinTime = 0.5f;
+    private float _stopAttackMaxTime = 0.8f;
     private float _stopAttackTime;
 
     // change direction
@@ -49,6 +49,16 @@ public class EnemyAttackState : EnemyState<EnemyState>
 
         Paintint();
         Attack();
+
+        if (_enemyBase.EnemyGun.IsNonePaint())
+        {
+            if (_enemyBase.EnemyGun.IsCanPaint())
+                _enemyBase.EnemyGun.PlayPaintParticle();
+            else
+                _enemyBase.EnemyGun.StopPaintParticle();
+        }
+        else
+            _enemyBase.EnemyGun.PlayPaintParticle();
     }
 
     private void Paintint()

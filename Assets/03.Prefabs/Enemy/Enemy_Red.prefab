@@ -1104,6 +1104,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Paint Particle
       objectReference: {fileID: 0}
+    - target: {fileID: 6578503859558374564, guid: b8ce3c9b9edf98343b55f74c8669524b, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 7444553557212865390, guid: b8ce3c9b9edf98343b55f74c8669524b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1267,3 +1271,4 @@ MonoBehaviour:
   _shootParticle: {fileID: 8062240181212539302}
   _shootClip: {fileID: 8300000, guid: 6b5e457cbd21dcd4e8d17192cfe54f8f, type: 3}
   _isSoundOn: 0
+  isAgentActive: 1

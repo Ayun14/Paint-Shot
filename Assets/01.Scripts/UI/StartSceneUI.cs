@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -42,7 +43,6 @@ public class StartSceneUI : MonoBehaviour
 
     public void PlayButtonClick()
     {
-        // 페이드인 처리
         SceneManager.LoadScene(1);
     }
 

@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
 
     private Vector3 _spawnPos; // 스폰, 리스폰되는 장소
 
-    private float _spawnDelayTime = 5f;
+    private float _spawnDelayTime = 3f;
 
     private void Awake()
     {
@@ -53,12 +53,17 @@ public class Player : MonoBehaviour
 
     private IEnumerator RespawnRoutine()
     {
+        AgentGun.isAgentActive = false;
         yield return new WaitForSeconds(_spawnDelayTime);
+        AgentGun.isAgentActive = true;
 
+        gameObject.SetActive(false);
         PlayerAnimation.ChangeAnimation(AnimationType.Idle.ToString());
         PlayerInput.SetPlayerInput(true);
         _collider.enabled = true;
         PlayerHealth.HealthReset();
+        AgentGun.OnDeadPaintFill();
+        gameObject.SetActive(true);
 
         transform.position = _spawnPos;
     }
@@ -72,7 +77,7 @@ public class Player : MonoBehaviour
 
         PlayerAnimation.StopPaintAnimation();
         PlayerAnimation.StopRunAnimation();
-        PlayerAnimation.PlayIdleAnimation();
+        PlayerAnimation.StopIdleAnimation();
     }
 
     public void SetResult()
@@ -82,6 +87,9 @@ public class Player : MonoBehaviour
 
     public void SetGameOver()
     {
+        StopAllCoroutines();
+
+        AgentGun.isAgentActive = false;
         AgentGun.StopPaintParticle();
         PlayerAnimation.ChangeAnimation(AnimationType.Idle.ToString());
         SetDeath();

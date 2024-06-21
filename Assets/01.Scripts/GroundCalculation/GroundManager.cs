@@ -20,11 +20,11 @@ public class GroundManager : Singleton<GroundManager>
     public void ResetGroundManager()
     {
         foreach (GroundNode node in _groundNodeList)
-        {
             node.nodeId = "";
-            _rankingDictionary.Clear();
-            nameList.Clear();
-        }
+
+        _rankingDictionary.Clear();
+        nameList.Clear();
+        _groundNodeList.Clear();
     }
 
     public void AddNodeList(GroundNode node)
