@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,7 +27,7 @@ public class StartSceneUI : MonoBehaviour
 
     private void Init()
     {
-        Invoke($"Color{AgentManager.Instance.AgentColor}ButtonClick", 0.01f);
+        GetColorButtonClickAction();
 
         AudioListener.volume = AudioManager.Instance.GetVolume();
         if (AudioListener.volume == 1)
@@ -38,6 +39,37 @@ public class StartSceneUI : MonoBehaviour
         {
             _soundSettingImage.sprite = _soundSprites[0];
             _soundEnable = false;
+        }
+    }
+
+    private void GetColorButtonClickAction()
+    {
+        switch (AgentManager.Instance.AgentColor)
+        {
+            case AgentColor.Red:
+                 ColorRedButtonClick();
+                break;
+            case AgentColor.Orange:
+                ColorOrangeButtonClick();
+                break;
+            case AgentColor.Yellow:
+                ColorYellowButtonClick();
+                break;
+            case AgentColor.Green:
+                ColorGreenButtonClick();
+                break;
+            case AgentColor.Blue:
+                ColorBlueButtonClick();
+                break;
+            case AgentColor.Mint:
+                ColorMintButtonClick();
+                break;
+            case AgentColor.Pink:
+                ColorPinkButtonClick();
+                break;
+            case AgentColor.Purple:
+                ColorPurpleButtonClick();
+                break;
         }
     }
 
@@ -112,6 +144,7 @@ public class StartSceneUI : MonoBehaviour
 
     public void ColorMintButtonClick()
     {
+        Debug.Log("½Ã");
         CheckedButtonOff();
         AgentManager.Instance.ChangePlayerColor(AgentColor.Mint);
         _player.ChangePlayerMat(AgentColor.Mint);

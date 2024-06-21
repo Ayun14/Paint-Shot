@@ -122,11 +122,10 @@ public class UIManager : Observer
 
     public void HomeButtonClick()
     {
-        // 페이드인 페이드 아웃
         StopAllCoroutines();
         GroundManager.Instance.ResetGroundManager();
 
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(2);
     }
 
     private IEnumerator CountdownRoutine()

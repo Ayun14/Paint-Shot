@@ -1310,51 +1310,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 604802519}
   m_CullTransparentMesh: 0
---- !u!1 &621484061
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 621484063}
-  - component: {fileID: 621484064}
-  m_Layer: 0
-  m_Name: AudioManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &621484063
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 621484061}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &621484064
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 621484061}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31600549b9afdf6428c87d15ac64f093, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _audioObj: {fileID: 7346478303150915713, guid: 36f4739ffd4cf4649a7acc7dea7419c0, type: 3}
 --- !u!1 &630569522
 GameObject:
   m_ObjectHideFlags: 0
@@ -1649,69 +1604,6 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 736202340}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &762905845
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 762905847}
-  - component: {fileID: 762905846}
-  m_Layer: 0
-  m_Name: AgentManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &762905846
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 762905845}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e41d7dda83b5b6143b665dce118b69e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _enemyList:
-  - {fileID: 5105671577019733827, guid: f14acb7eaf6d58249a5d82ee8d6cf8f0, type: 3}
-  - {fileID: 5105671577019733827, guid: 09b638182b6824343b70ae99131dcf62, type: 3}
-  - {fileID: 5105671577019733827, guid: 2b035d92c478f284da715b8367c3c8d4, type: 3}
-  - {fileID: 5105671577019733827, guid: 0a85c14dc953a844293f2cfb7792b1b3, type: 3}
-  - {fileID: 5105671577019733827, guid: c6b4d8b7c7a26f9498d477a20acd5ca9, type: 3}
-  - {fileID: 5105671577019733827, guid: 70ef213850e46cb4db92017da5cc15e7, type: 3}
-  - {fileID: 5105671577019733827, guid: 9325485da9dbef44e878f756b8540c4c, type: 3}
-  - {fileID: 5105671577019733827, guid: 0406071c3fd24a64ea91576fff66ab42, type: 3}
-  _colorMatList:
-  - {fileID: 2100000, guid: ef8c2b84eb1d743499c13ac97f1e70d3, type: 2}
-  - {fileID: 2100000, guid: 84d106f504c38e546b7476febe20bd90, type: 2}
-  - {fileID: 2100000, guid: ed5f65ca17a1f854fb9c555c7a917aae, type: 2}
-  - {fileID: 2100000, guid: e80b932a35fc22a4b9129273f2799477, type: 2}
-  - {fileID: 2100000, guid: 132b24def88fad944b21a60c45772a6b, type: 2}
-  - {fileID: 2100000, guid: 428007eee0709e3418a138c2725d4154, type: 2}
-  - {fileID: 2100000, guid: 5f3fb33899c6d6a4eab3653b3c3fe258, type: 2}
-  - {fileID: 2100000, guid: b419d4a91337ac04b91427b7ac4f829b, type: 2}
-  _enemySpawnCnt: 4
---- !u!4 &762905847
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 762905845}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -6719,6 +6611,4 @@ SceneRoots:
   - {fileID: 7226071496246719257}
   - {fileID: 1706342388}
   - {fileID: 736202343}
-  - {fileID: 762905847}
-  - {fileID: 621484063}
   - {fileID: 218653863}
