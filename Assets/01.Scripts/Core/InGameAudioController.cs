@@ -10,7 +10,10 @@ public class InGameAudioController : Observer
     private AudioObject _inGameBGMObj;
 
     [Header("Over")]
-    [SerializeField] private AudioClip _gameOverWhistle;
+    [SerializeField] private AudioClip _gameOverWhistleClip;
+
+    [Header("Result")]
+    [SerializeField] private AudioClip _drumRollClip;
 
     private GameController _gameController;
 
@@ -24,7 +27,7 @@ public class InGameAudioController : Observer
             OnCountdown();
             OnPlaying();
             OnGameOver();
-            OnResult();
+            OnReault();
         }
     }
 
@@ -54,15 +57,18 @@ public class InGameAudioController : Observer
         if (_gameController.IsOver)
         {
             _inGameBGMObj.DestoyAudioObject();
-            AudioManager.Instance.Play(_gameOverWhistle, false);
+            AudioManager.Instance.Play(_gameOverWhistleClip, false);
         }
     }
 
-    private void OnResult()
+    private void OnReault()
     {
         if (_gameController.IsResult)
-        {
+            Invoke("DrumRollSound", 2);
+    }
 
-        }
+    private void DrumRollSound()
+    {
+        AudioManager.Instance.Play(_drumRollClip, false);
     }
 }

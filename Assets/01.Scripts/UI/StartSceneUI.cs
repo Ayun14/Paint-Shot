@@ -144,7 +144,6 @@ public class StartSceneUI : MonoBehaviour
 
     public void ColorMintButtonClick()
     {
-        Debug.Log("½Ã");
         CheckedButtonOff();
         AgentManager.Instance.ChangePlayerColor(AgentColor.Mint);
         _player.ChangePlayerMat(AgentColor.Mint);
